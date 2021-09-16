@@ -9,37 +9,37 @@ namespace NsfwSpy
     /// <summary>
     /// The result from classifying an image.
     /// </summary>
-    public record NsfwSpyResult
+    public class NsfwSpyResult
     {
         /// <summary>
         /// The drawing probability score between 0 and 1.
         /// </summary>
-        public float Drawing { get; init; }
+        public float Drawing { get; }
 
         /// <summary>
         /// The hentai probability score between 0 and 1.
         /// </summary>
-        public float Hentai { get; init; }
+        public float Hentai { get; }
 
         /// <summary>
         /// The neutral probability score between 0 and 1.
         /// </summary>
-        public float Neutral { get; init; }
+        public float Neutral { get; }
 
         /// <summary>
         /// The pornography probability score between 0 and 1.
         /// </summary>
-        public float Pornography { get; init; }
+        public float Pornography { get; }
 
         /// <summary>
         /// The sexy probability score between 0 and 1.
         /// </summary>
-        public float Sexy { get; init; }
+        public float Sexy { get; }
 
         /// <summary>
         /// The most likely predicted value.
         /// </summary>
-        public string PredictedLabel { get; init; }
+        public string PredictedLabel { get; }
 
         /// <summary>
         /// Whether the image is likely to be explicit. True if the sum of nsfw, hentai and sexy is equal to or above 0.5.

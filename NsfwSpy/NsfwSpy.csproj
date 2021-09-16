@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
     <Authors>d00M_L0rDz</Authors>
     <Company>d00M_L0rDz</Company>
     <PackageTags>nsfw nude nudity porn pornography explicit image detect detection classification classifier</PackageTags>
@@ -13,6 +13,7 @@
     <PackageLicenseExpression></PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>

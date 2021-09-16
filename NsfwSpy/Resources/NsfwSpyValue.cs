@@ -8,8 +8,8 @@ namespace NsfwSpy
 {
     public class NsfwSpyValue
     {
-        public string FilePath { get; init; }
-        public NsfwSpyResult Result { get; init; }
+        public string FilePath { get; }
+        public NsfwSpyResult Result { get; }
 
         public NsfwSpyValue(string filePath, NsfwSpyResult result)
         {
