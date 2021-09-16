@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NsfwSpy.Train", "NsfwSpy.Tr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NsfwSpy.PerformanceTesting", "NsfwSpy.PerformanceTesting\NsfwSpy.PerformanceTesting.csproj", "{412E968C-E4D6-4CA1-9C75-8F78BE7275CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NsfwSpy.Test", "NsfwSpy.Test\NsfwSpy.Test.csproj", "{3DE7054D-D7B5-4315-ADEF-5E4BA2D21138}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NsfwSpy.Test", "NsfwSpy.Test\NsfwSpy.Test.csproj", "{3DE7054D-D7B5-4315-ADEF-5E4BA2D21138}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

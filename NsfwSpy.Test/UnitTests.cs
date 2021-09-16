@@ -4,7 +4,7 @@ using System.Net;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace NsfwSpy.Test
+namespace NsfwSpyNS.Test
 {
     public class UnitTests
     {

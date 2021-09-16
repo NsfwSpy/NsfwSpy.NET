@@ -5,7 +5,7 @@ using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace NsfwSpy
+namespace NsfwSpyNS
 {
     /// <summary>
     /// The NsfwSpy classifier class used to analyse images for explicit content.

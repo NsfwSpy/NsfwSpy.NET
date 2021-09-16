@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace NsfwSpy.PerformanceTesting
+namespace NsfwSpyNS.PerformanceTesting
 {
     class Program
     {
