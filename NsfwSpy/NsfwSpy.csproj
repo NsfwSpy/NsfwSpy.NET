@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <Authors>d00M_L0rDz</Authors>
+    <Company>d00M_L0rDz</Company>
+    <PackageTags>nsfw nude nudity porn pornography explicit image detect detection classification classifier</PackageTags>
+    <Description>An image classifier to identify explicit/pornographic images.</Description>
+    <RepositoryUrl>https://github.com/d00ML0rDz/NsfwSpy</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/d00ML0rDz/NsfwSpy</PackageProjectUrl>
+    <PackageIcon>NsfwSpy-Icon.jpg</PackageIcon>
+    <PackageIconUrl />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.ML" Version="1.6.0" />
+    <PackageReference Include="Microsoft.ML.Vision" Version="1.6.0" />
+    <PackageReference Include="SciSharp.TensorFlow.Redist-Windows-GPU" Version="2.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="NsfwSpyModel.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="NsfwSpy-Icon.jpg">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>
