@@ -10,6 +10,9 @@
     <PackageProjectUrl>https://github.com/d00ML0rDz/NsfwSpy</PackageProjectUrl>
     <PackageIcon>NsfwSpy-Icon.jpg</PackageIcon>
     <PackageIconUrl />
+    <PackageLicenseExpression></PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -21,6 +24,10 @@
   <ItemGroup>
     <None Update="NsfwSpyModel.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
     </None>
     <None Include="NsfwSpy-Icon.jpg">
       <Pack>True</Pack>
