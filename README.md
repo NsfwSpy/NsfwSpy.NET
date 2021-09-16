@@ -54,3 +54,7 @@ nsfwSpy.ClassifyImages(files, (filePath, result) =>
     Console.WriteLine($"{filePath} - {result.PredictedLabel}");
 });
 ```
+# Notes
+Using NsfwSpy? Let us know! We're keen to hear how the technology is being used and improving the safety of applications.
+
+Got an issue or found something not quite right? Report it [here](https://github.com/d00ML0rDz/NsfwSpy/issues) on GitHub and we'll try to help as best as possible.
