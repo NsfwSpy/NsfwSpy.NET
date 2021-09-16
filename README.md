@@ -40,14 +40,14 @@ var result = nsfwSpy.ClassifyImage(@"C:\Users\username\Documents\flower.jpg");
 
 ### Classify a Web Image
 ```csharp
-var uri = new Uri("https://raw.githubusercontent.com/d00ML0rDz/NsfwSpy/main/NsfwSpy.Test/Assets/flower.jpg")
+var uri = new Uri("https://raw.githubusercontent.com/d00ML0rDz/NsfwSpy/main/NsfwSpy.Test/Assets/flower.jpg");
 var nsfwSpy = new NsfwSpy();
 var result = nsfwSpy.ClassifyImage(uri);
 ```
 
 ### Classify Multiple Image Files
 ```csharp
-var files = Directory.GetFiles(@"C:\Users\username\Pictures")
+var files = Directory.GetFiles(@"C:\Users\username\Pictures");
 var nsfwSpy = new NsfwSpy();
 nsfwSpy.ClassifyImages(files, (filePath, result) =>
 {
