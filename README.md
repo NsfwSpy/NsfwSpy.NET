@@ -14,7 +14,7 @@ NsfwSpy is a nudity/pornography image classifier built for .NET Core 2.0 and lat
 # Performance
 NsfwSpy isn't perfect, but the accuracy should be good enough to detect approximately 96% of Nsfw images, those being images that are classed as pornography, sexy or hentai.
 
-| a | Pornography | Sexy | Hentai | Neutral | Drawing
+|   | Pornography | Sexy | Hentai | Neutral | Drawing
 | --- | --- | --- | --- | --- | --- |
 | IsNsfw  <sub><sup>(pornography + sexy + hentai >= 0.5)</sup></sub> | 96.4% | 96.7% | 95.7% | 2.3% | 2.5%
 | Correctly Predicted Label | 86.8% | 82.8% | 87.1% | 97.6% | 89.6%
@@ -40,17 +40,21 @@ var result = nsfwSpy.ClassifyImage(@"C:\Users\username\Documents\flower.jpg");
 
 ### Classify a Web Image
 ```csharp
-var uri = new Uri("https://raw.githubusercontent.com/d00ML0rDz/NsfwSpy/main/NsfwSpy.Test/Assets/flower.jpg")
+var uri = new Uri("https://raw.githubusercontent.com/d00ML0rDz/NsfwSpy/main/NsfwSpy.Test/Assets/flower.jpg");
 var nsfwSpy = new NsfwSpy();
 var result = nsfwSpy.ClassifyImage(uri);
 ```
 
 ### Classify Multiple Image Files
 ```csharp
-var files = Directory.GetFiles(@"C:\Users\username\Pictures")
+var files = Directory.GetFiles(@"C:\Users\username\Pictures");
 var nsfwSpy = new NsfwSpy();
 nsfwSpy.ClassifyImages(files, (filePath, result) =>
 {
     Console.WriteLine($"{filePath} - {result.PredictedLabel}");
 });
 ```
+# Notes
+Using NsfwSpy? Let us know! We're keen to hear how the technology is being used and improving the safety of applications.
+
+Got an issue or found something not quite right? Report it [here](https://github.com/d00ML0rDz/NsfwSpy/issues) on GitHub and we'll try to help as best as possible.
