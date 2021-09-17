@@ -8,12 +8,12 @@
     <Description>An image classifier to identify explicit/pornographic images.</Description>
     <RepositoryUrl>https://github.com/d00ML0rDz/NsfwSpy</RepositoryUrl>
     <PackageProjectUrl>https://github.com/d00ML0rDz/NsfwSpy</PackageProjectUrl>
-    <PackageIcon>NsfwSpy-Icon.jpg</PackageIcon>
+    <PackageIcon>NsfwSpy-Icon.png</PackageIcon>
     <PackageIconUrl />
     <PackageLicenseExpression></PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <Version>1.0.9</Version>
+    <Version>1.0.10</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -27,7 +27,11 @@
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
-    <None Include="NsfwSpy-Icon.jpg">
+    <None Include="NsfwSpy-Icon.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="NsfwSpy-Icon.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
