@@ -45,6 +45,13 @@ var nsfwSpy = new NsfwSpy();
 var result = nsfwSpy.ClassifyImage(uri);
 ```
 
+### Classify an Image from a Byte Array
+```csharp
+var fileBytes = File.ReadAllBytes(filePath);
+var nsfwSpy = new NsfwSpy();
+var result = nsfwSpy.ClassifyImage(fileBytes);
+```
+
 ### Classify Multiple Image Files
 ```csharp
 var files = Directory.GetFiles(@"C:\Users\username\Pictures");
