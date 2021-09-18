@@ -16,7 +16,7 @@ NsfwSpy isn't perfect, but the accuracy should be good enough to detect approxim
 
 |   | Pornography | Sexy | Hentai | Neutral | Drawing
 | --- | --- | --- | --- | --- | --- |
-| IsNsfw  <sub><sup>(pornography + sexy + hentai >= 0.5)</sup></sub> | 96.4% | 96.7% | 95.7% | 2.3% | 2.5%
+| Is Nsfw  <sub><sup>(pornography + sexy + hentai >= 0.5)</sup></sub> | 96.4% | 96.7% | 95.7% | 2.3% | 2.5%
 | Correctly Predicted Label | 86.8% | 82.8% | 87.1% | 97.6% | 89.6%
 
 # Quick Start
@@ -45,6 +45,13 @@ var nsfwSpy = new NsfwSpy();
 var result = nsfwSpy.ClassifyImage(uri);
 ```
 
+### Classify an Image from a Byte Array
+```csharp
+var fileBytes = File.ReadAllBytes(filePath);
+var nsfwSpy = new NsfwSpy();
+var result = nsfwSpy.ClassifyImage(fileBytes);
+```
+
 ### Classify Multiple Image Files
 ```csharp
 var files = Directory.GetFiles(@"C:\Users\username\Pictures");
@@ -54,6 +61,9 @@ nsfwSpy.ClassifyImages(files, (filePath, result) =>
     Console.WriteLine($"{filePath} - {result.PredictedLabel}");
 });
 ```
+# GPU Support
+GPU usage is currently only supported on Windows and Linux. To get this working, please follow the prerequisite steps [here](https://docs.microsoft.com/en-us/dotnet/api/microsoft.ml.vision.imageclassificationtrainer?view=ml-dotnet&fbclid=IwAR3Ng6Pe1BWDZ3hR20tchutSozmdMojxvpy3pqdwA3fZ_OEstU8C-ptSRZw#gpu-support) to install CUDA v10.1 and CUDNN v7.6.4. The SciSharp.TensorFlow.Redist-Windows-GPU and SciSharp.TensorFlow.Redist-Linux-GPU packages are already included as part of the NsfwSpy package.
+
 # Notes
 Using NsfwSpy? Let us know! We're keen to hear how the technology is being used and improving the safety of applications.
 
