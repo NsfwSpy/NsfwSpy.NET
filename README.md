@@ -1,13 +1,13 @@
 <img src="https://raw.githubusercontent.com/d00ML0rDz/NsfwSpy/main/_art/NsfwSpy-Logo.jpg" alt="NsfwSpy Logo" width="400"/>
 
 # Introduction
-NsfwSpy is a nudity/pornography image classifier built for .NET Core 2.0 and later to aid in moderating user-generated content for various different application types, written in C#. The [ML.NET](https://github.com/dotnet/machinelearning) model has been trained against the ResNet V250 neural net architecture with over 360,000 images, from 5 different categories:
+NsfwSpy is a nudity/pornography image classifier built for .NET Core 2.0 and later to aid in moderating user-generated content for various different application types, written in C#. The [ML.NET](https://github.com/dotnet/machinelearning) model has been trained against the ResNet V250 neural net architecture with 380,000 images (84GB), from 5 different categories:
 
 | Label       | Description |
 | ----------- | ----------- |
 | Pornography | Images that depict sexual acts and nudity. |
 | Sexy        | Images of people in their underwear and men who are topless. |
-| Hentai      | Drawings or animations of nudity and sexual acts. |
+| Hentai      | Drawings or animations of sexual acts and nudity. |
 | Neutral     | Images that are not sexual in nature. |
 | Drawing     | Drawings or animations that are not sexual in nature. |
 
@@ -18,8 +18,8 @@ NsfwSpy isn't perfect, but the accuracy should be good enough to detect approxim
 
 |   | Pornography | Sexy | Hentai | Neutral | Drawing
 | --- | --- | --- | --- | --- | --- |
-| Is Nsfw  <sub><sup>(pornography + sexy + hentai >= 0.5)</sup></sub> | 96.4% | 96.7% | 95.7% | 2.3% | 2.5%
-| Correctly Predicted Label | 86.8% | 82.8% | 87.1% | 97.6% | 89.6%
+| Is Nsfw  <sub><sup>(pornography + sexy + hentai >= 0.5)</sup></sub> | 96.4% | 96.9% | 95.7% | 2.3% | 2.8%
+| Correctly Predicted Label | 87.2% | 83.3% | 87.7% | 97.6% | 89.6%
 
 # Quick Start
 This project is available as a [Nuget](https://www.nuget.org/packages/NsfwSpy/) package and can be installed with the following commands:
