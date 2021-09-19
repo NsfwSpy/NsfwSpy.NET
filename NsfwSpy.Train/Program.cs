@@ -49,10 +49,10 @@ namespace NsfwSpyNS.Train
                 TestOnTrainSet = true,
                 ReuseTrainSetBottleneckCachedValues = true,
                 ReuseValidationSetBottleneckCachedValues = true,
-                Epoch = 250,
+                Epoch = 2500,
                 BatchSize = 32,
-                LearningRate = 0.0075f,
-                EarlyStoppingCriteria = null,
+                LearningRate = 0.01f,
+                EarlyStoppingCriteria = new ImageClassificationTrainer.EarlyStopping { CheckIncreasing = true, MinDelta = 0.00001f, Patience = 50 },
                 WorkspacePath = workspaceRelativePath
             };
 
