@@ -63,6 +63,25 @@ nsfwSpy.ClassifyImages(files, (filePath, result) =>
     Console.WriteLine($"{filePath} - {result.PredictedLabel}");
 });
 ```
+
+### Classify a Gif File
+```csharp
+var nsfwSpy = new NsfwSpy();
+var result = nsfwSpy.ClassifyGif(@"C:\Users\username\Documents\happy.gif");
+```
+
+### Classify a Web Gif
+```csharp
+var uri = new Uri("https://raw.githubusercontent.com/d00ML0rDz/NsfwSpy/main/NsfwSpy.Test/Assets/cool.gif");
+var nsfwSpy = new NsfwSpy();
+var result = nsfwSpy.ClassifyGif(uri);
+```
+
+### Dependency Injection
+```csharp
+services.AddScoped<INsfwSpy, NsfwSpy>();
+```
+
 # GPU Support
 GPU usage is currently only supported on Windows and Linux. To get this working, please follow the prerequisite steps [here](https://docs.microsoft.com/en-us/dotnet/api/microsoft.ml.vision.imageclassificationtrainer?view=ml-dotnet&fbclid=IwAR3Ng6Pe1BWDZ3hR20tchutSozmdMojxvpy3pqdwA3fZ_OEstU8C-ptSRZw#gpu-support) to install [CUDA v10.1](https://developer.nvidia.com/cuda-10.1-download-archive-update2) and [CUDNN v7.6.4](https://developer.nvidia.com/rdp/cudnn-download). Later versions do not work (as I tried with CUDA v11.4). The SciSharp.TensorFlow.Redist-Windows-GPU and SciSharp.TensorFlow.Redist-Linux-GPU packages are already included as part of the NsfwSpy package.
 
