@@ -1,6 +1,8 @@
 ﻿using Microsoft.ML;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Net;
 using System.Threading.Tasks;
@@ -112,6 +114,48 @@ namespace NsfwSpyNS
                     actionAfterEachClassify.Invoke(filePath, result);
             });
 
+            return results;
+        }
+
+        private NsfwSpyGifResult ClassifyGif(Image gifImage, GifOptions gifOptions = null)
+        {
+            if (gifOptions == null) 
+                gifOptions = new GifOptions();
+
+            if (gifOptions.ClassifyEveryNthFrame < 1) 
+                throw new Exception("GifOptions.ClassifyEveryNthFrame must not be less than 1.");
+
+            var results = new Dictionary<int, NsfwSpyResult>();
+            var dimension = new FrameDimension(gifImage.FrameDimensionsList[0]);
+            var frameCount = gifImage.GetFrameCount(dimension);
+
+            for (int i = 0; i < frameCount; i++)
+            {
+                if (i % gifOptions.ClassifyEveryNthFrame != 0) 
+                    continue;
+
+                gifImage.SelectActiveFrame(dimension, i);
+                using (var ms = new MemoryStream())
+                {
+                    gifImage.Save(ms, ImageFormat.Jpeg);
+                    var frameData = ms.ToArray();
+                    var result = ClassifyImage(frameData);
+                    results.Add(i, result);
+
+                    // Stop classifying frames if Nsfw frame is found
+                    if (result.IsNsfw && gifOptions.EarlyStopOnNsfw)
+                        break;
+                }
+            }
+
+            var gifResult = new NsfwSpyGifResult(results);
+            return gifResult;
+        }
+
+        public NsfwSpyGifResult ClassifyGif(string filePath, GifOptions gifOptions = null)
+        {
+            var gifImage = Image.FromFile(filePath);
+            var results = ClassifyGif(gifImage, gifOptions);
             return results;
         }
     }
