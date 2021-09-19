@@ -12,7 +12,7 @@ namespace NsfwSpyNS
     /// <summary>
     /// The NsfwSpy classifier class used to analyse images for explicit content.
     /// </summary>
-    public class NsfwSpy
+    public class NsfwSpy : INsfwSpy
     {
         private static ITransformer _model;
 
@@ -104,7 +104,7 @@ namespace NsfwSpyNS
         {
             var results = new List<NsfwSpyValue>();
 
-            Parallel.ForEach(filesPaths, new ParallelOptions { MaxDegreeOfParallelism = 4 }, filePath =>
+            foreach (var filePath in filesPaths)
             {
                 var result = ClassifyImage(filePath);
                 var value = new NsfwSpyValue(filePath, result);
@@ -112,17 +112,17 @@ namespace NsfwSpyNS
 
                 if (actionAfterEachClassify != null)
                     actionAfterEachClassify.Invoke(filePath, result);
-            });
+            }
 
             return results;
         }
 
         private NsfwSpyGifResult ClassifyGif(Image gifImage, GifOptions gifOptions = null)
         {
-            if (gifOptions == null) 
+            if (gifOptions == null)
                 gifOptions = new GifOptions();
 
-            if (gifOptions.ClassifyEveryNthFrame < 1) 
+            if (gifOptions.ClassifyEveryNthFrame < 1)
                 throw new Exception("GifOptions.ClassifyEveryNthFrame must not be less than 1.");
 
             var results = new Dictionary<int, NsfwSpyResult>();
@@ -131,7 +131,7 @@ namespace NsfwSpyNS
 
             for (int i = 0; i < frameCount; i++)
             {
-                if (i % gifOptions.ClassifyEveryNthFrame != 0) 
+                if (i % gifOptions.ClassifyEveryNthFrame != 0)
                     continue;
 
                 gifImage.SelectActiveFrame(dimension, i);
@@ -152,11 +152,36 @@ namespace NsfwSpyNS
             return gifResult;
         }
 
+        /// <summary>
+        /// Classify a .gif file from a path.
+        /// </summary>
+        /// <param name="filePath">Path to the .gif to be classified.</param>
+        /// <param name="gifOptions">GifOptions to customise how the frames of the file are classified.</param>
+        /// <returns>A NsfwSpyGifResult with results for each frame classified.</returns>
         public NsfwSpyGifResult ClassifyGif(string filePath, GifOptions gifOptions = null)
         {
             var gifImage = Image.FromFile(filePath);
             var results = ClassifyGif(gifImage, gifOptions);
             return results;
+        }
+
+        /// <summary>
+        /// Classify a .gif file  from a web url.
+        /// </summary>
+        /// <param name="uri">Web address of the Gif to be classified.</param>
+        /// <param name="webClient">A custom WebClient to download the Gif with.</param>
+        /// <param name="gifOptions">GifOptions to customise how the frames of the file are classified.</param>
+        /// <returns>A NsfwSpyGifResult with results for each frame classified.</returns>
+        public NsfwSpyGifResult ClassifyGif(Uri uri, WebClient webClient = null, GifOptions gifOptions = null)
+        {
+            if (webClient == null) webClient = new WebClient();
+
+            using (var stream = webClient.OpenRead(uri))
+            {
+                var gifImage = Image.FromStream(stream);
+                var results = ClassifyGif(gifImage, gifOptions);
+                return results;
+            }
         }
     }
 }
