@@ -1,5 +1,6 @@
 ﻿using Microsoft.ML;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
@@ -102,7 +103,7 @@ namespace NsfwSpyNS
         {
             var results = new List<NsfwSpyValue>();
 
-            Parallel.ForEach(filesPaths, new ParallelOptions { MaxDegreeOfParallelism = 4 }, filePath =>
+            foreach (var filePath in filesPaths)
             {
                 var result = ClassifyImage(filePath);
                 var value = new NsfwSpyValue(filePath, result);
@@ -110,7 +111,7 @@ namespace NsfwSpyNS
 
                 if (actionAfterEachClassify != null)
                     actionAfterEachClassify.Invoke(filePath, result);
-            });
+            }
 
             return results;
         }
