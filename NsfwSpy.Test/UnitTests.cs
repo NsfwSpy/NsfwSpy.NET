@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using Xunit;
@@ -97,6 +98,94 @@ namespace NsfwSpyNS.Test
             var result = await nsfwSpy.ClassifyImageAsync(filePath);
 
             Assert.Equal("Neutral", result.PredictedLabel);
+        }
+
+        [Fact]
+        public void ClassifyGifFilePath_ValidFilePath()
+        {
+            var filePath = Path.Combine(AppContext.BaseDirectory, @"Assets\cool.gif");
+
+            var nsfwSpy = new NsfwSpy();
+            var result = nsfwSpy.ClassifyGif(filePath);
+
+            Assert.Equal(10, result.Frames.Count);
+            Assert.False(result.IsNsfw);
+        }
+
+        [Fact]
+        public void ClassifyGifFilePath_ClassifyEvery2ndFrame()
+        {
+            var filePath = Path.Combine(AppContext.BaseDirectory, @"Assets\cool.gif");
+            var gifOptions = new GifOptions
+            {
+                ClassifyEveryNthFrame = 2
+            };
+
+            var nsfwSpy = new NsfwSpy();
+            var result = nsfwSpy.ClassifyGif(filePath, gifOptions);
+
+            Assert.Equal(5, result.Frames.Count);
+            Assert.False(result.IsNsfw);
+        }
+
+        [Fact]
+        public void ClassifyGifFilePath_EndEarlyOnNsfw()
+        {
+            var filePath = Path.Combine(AppContext.BaseDirectory, @"Assets\bikini.gif");
+            var gifOptions = new GifOptions
+            {
+                EarlyStopOnNsfw = true
+            };
+
+            var nsfwSpy = new NsfwSpy();
+            var result = nsfwSpy.ClassifyGif(filePath, gifOptions: gifOptions);
+
+            Assert.Single(result.Frames);
+            Assert.True(result.IsNsfw);
+        }
+
+        [Fact]
+        public void ClassifyGifUri_ValidUri()
+        {
+            var uri = new Uri("https://media2.giphy.com/media/62PP2yEIAZF6g/giphy.gif");
+
+            var nsfwSpy = new NsfwSpy();
+            var result = nsfwSpy.ClassifyGif(uri);
+
+            Assert.Equal(10, result.Frames.Count);
+            Assert.False(result.IsNsfw);
+        }
+
+        [Fact]
+        public void ClassifyGifUri_ClassifyEvery2ndFrame()
+        {
+            var uri = new Uri("https://media2.giphy.com/media/62PP2yEIAZF6g/giphy.gif");
+            var gifOptions = new GifOptions
+            {
+                ClassifyEveryNthFrame = 2
+            };
+
+            var nsfwSpy = new NsfwSpy();
+            var result = nsfwSpy.ClassifyGif(uri, gifOptions: gifOptions);
+
+            Assert.Equal(5, result.Frames.Count);
+            Assert.False(result.IsNsfw);
+        }
+
+        [Fact]
+        public void ClassifyGifUri_EndEarlyOnNsfw()
+        {
+            var uri = new Uri("https://media3.giphy.com/media/EdS6yxoLJ45Q4/giphy.gif");
+            var gifOptions = new GifOptions
+            {
+                EarlyStopOnNsfw = true
+            };
+
+            var nsfwSpy = new NsfwSpy();
+            var result = nsfwSpy.ClassifyGif(uri, gifOptions: gifOptions);
+
+            Assert.Single(result.Frames);
+            Assert.True(result.IsNsfw);
         }
     }
 }
