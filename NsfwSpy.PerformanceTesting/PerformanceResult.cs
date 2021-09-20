@@ -9,16 +9,20 @@ namespace NsfwSpyNS.PerformanceTesting
     class PerformanceResult
     {
         public string Key { get; set; }
-        public int CorrectAsserts { get; set; }
-        public int CorrectSpecialAsserts { get; set; }
-        public int FailedAsserts { get; set; }
-        public int FailedSpecialAsserts { get; set; }
-        public int TotalAsserts => CorrectAsserts + FailedAsserts;
-        public int TotalSpecialAsserts => CorrectSpecialAsserts + FailedSpecialAsserts;
+        public List<NsfwSpyResult> Results { get; set; }
+        public int CorrectAsserts => Results.Count(r => r.PredictedLabel == Key);
+        public int NsfwAsserts => Results.Count(r => r.IsNsfw);
+        public int DrawingAsserts => Results.Count(r => r.PredictedLabel == "Drawing");
+        public int HentaiAsserts => Results.Count(r => r.PredictedLabel == "Hentai");
+        public int NeutralAsserts => Results.Count(r => r.PredictedLabel == "Neutral");
+        public int PornographyAsserts => Results.Count(r => r.PredictedLabel == "Pornography");
+        public int SexyAsserts => Results.Count(r => r.PredictedLabel == "Sexy");
+        public int TotalAsserts => Results.Count();
 
         public PerformanceResult(string key)
         {
             Key = key;
+            Results = new List<NsfwSpyResult>();
         }
     }
 }
