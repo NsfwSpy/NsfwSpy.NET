@@ -58,7 +58,7 @@ var result = nsfwSpy.ClassifyImage(fileBytes);
 ```csharp
 var files = Directory.GetFiles(@"C:\Users\username\Pictures");
 var nsfwSpy = new NsfwSpy();
-nsfwSpy.ClassifyImages(files, (filePath, result) =>
+var results = nsfwSpy.ClassifyImages(files, (filePath, result) =>
 {
     Console.WriteLine($"{filePath} - {result.PredictedLabel}");
 });
