@@ -24,12 +24,12 @@ NsfwSpy isn't perfect, but the accuracy should be good enough to detect approxim
 # Quick Start
 This project is available as a [NuGet](https://www.nuget.org/packages/NsfwSpy/) package and can be installed with the following commands:
 
-Package Manager
+**Package Manager**
 ```
 Install-Package NsfwSpy
 ```
 
-.NET CLI
+**.NET CLI**
 ```
 dotnet add package NsfwSpy
 ```
@@ -88,12 +88,12 @@ To get GPU support working, please follow the prerequisite steps [here](https://
 # macOS Support
 To get NsfwSpy working on macOS, the [SciSharp.TensorFlow.Redist v2.3.1](https://www.nuget.org/packages/SciSharp.TensorFlow.Redist/2.3.1) NuGet package also needs to be installed. This not included by default as it interfers with supporting GPUs on Windows and Linux. You can do this with either of the following commands:
 
-Package Manager
+**Package Manager**
 ```
 Install-Package SciSharp.TensorFlow.Redist -Version 2.3.1
 ```
 
-.NET CLI
+**.NET CLI**
 ```
 dotnet add package SciSharp.TensorFlow.Redist --version 2.3.1
 ```
