@@ -1,7 +1,7 @@
 <img src="https://raw.githubusercontent.com/d00ML0rDz/NsfwSpy/main/_art/NsfwSpy-Logo.jpg" alt="NsfwSpy Logo" width="400"/>
 
 # Introduction
-NsfwSpy is a nudity/pornography image classifier built for .NET Core 2.0 and later, with support for Windows and Linux, to aid in moderating user-generated content for various different application types, written in C#. The [ML.NET](https://github.com/dotnet/machinelearning) model has been trained against the ResNet V250 neural net architecture with 380,000 images (84GB), from 5 different categories:
+NsfwSpy is a nudity/pornography image classifier built for .NET Core 2.0 and later, with support for Windows, [macOS](#macos-support) and Linux, to aid in moderating user-generated content for various different application types, written in C#. The [ML.NET](https://github.com/dotnet/machinelearning) model has been trained against the ResNet V250 neural net architecture with 380,000 images (84GB), from 5 different categories:
 
 | Label       | Description |
 | ----------- | ----------- |
@@ -22,7 +22,7 @@ NsfwSpy isn't perfect, but the accuracy should be good enough to detect approxim
 | Correctly Predicted Label | 87.2% | 83.3% | 87.7% | 97.6% | 89.6%
 
 # Quick Start
-This project is available as a [Nuget](https://www.nuget.org/packages/NsfwSpy/) package and can be installed with the following commands:
+This project is available as a [NuGet](https://www.nuget.org/packages/NsfwSpy/) package and can be installed with the following commands:
 
 Package Manager
 ```
@@ -84,6 +84,19 @@ services.AddScoped<INsfwSpy, NsfwSpy>();
 
 # GPU Support
 To get GPU support working, please follow the prerequisite steps [here](https://docs.microsoft.com/en-us/dotnet/api/microsoft.ml.vision.imageclassificationtrainer?view=ml-dotnet&fbclid=IwAR3Ng6Pe1BWDZ3hR20tchutSozmdMojxvpy3pqdwA3fZ_OEstU8C-ptSRZw#gpu-support) to install [CUDA v10.1](https://developer.nvidia.com/cuda-10.1-download-archive-update2) and [CUDNN v7.6.4](https://developer.nvidia.com/rdp/cudnn-download). Later versions do not work (as I tried with CUDA v11.4). The SciSharp.TensorFlow.Redist-Windows-GPU and SciSharp.TensorFlow.Redist-Linux-GPU packages are already included as part of the NsfwSpy package.
+
+# macOS Support
+To get NsfwSpy working on macOS, the [SciSharp.TensorFlow.Redist v2.3.1](https://www.nuget.org/packages/SciSharp.TensorFlow.Redist/2.3.1) NuGet package also needs to be installed. This not included by default as it interfers with supporting GPUs on Windows and Linux. You can do this with either of the following commands:
+
+Package Manager
+```
+Install-Package SciSharp.TensorFlow.Redist -Version 2.3.1
+```
+
+.NET CLI
+```
+dotnet add package SciSharp.TensorFlow.Redist --version 2.3.1
+```
 
 # Notes
 Using NsfwSpy? Let us know! We're keen to hear how the technology is being used and improving the safety of applications.
