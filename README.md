@@ -1,7 +1,7 @@
 <img src="https://raw.githubusercontent.com/d00ML0rDz/NsfwSpy/main/_art/NsfwSpy-Logo.jpg" alt="NsfwSpy Logo" width="400"/>
 
 # Introduction
-NsfwSpy is a nudity/pornography image classifier built for .NET Core 2.0 and later, with support for Windows, [macOS](#macos-support) and Linux, to aid in moderating user-generated content for various different application types, written in C#. The [ML.NET](https://github.com/dotnet/machinelearning) model has been trained against the ResNet V250 neural net architecture with 380,000 images (84GB), from 4 different categories:
+NsfwSpy is a nudity/pornography image classifier built for .NET Core 2.0 and later, with support for Windows, [macOS](#macos-support) and Linux, to aid in moderating user-generated content for various different application types, written in C#. The [ML.NET](https://github.com/dotnet/machinelearning) model has been trained against the ResNet V250 neural net architecture with 395,000 images (90GB), from 4 different categories:
 
 | Label       | Description |
 | ----------- | ----------- |
