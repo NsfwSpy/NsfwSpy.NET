@@ -14,7 +14,6 @@ namespace NsfwSpyNS.PerformanceTesting
 
             var classificationTypes = new[]
             {
-                "Drawing",
                 "Hentai",
                 "Neutral",
                 "Pornography",
@@ -53,11 +52,11 @@ namespace NsfwSpyNS.PerformanceTesting
             Console.WriteLine("Confusion Matrix\n");
 
             Console.WriteLine("\t\t\tPredicted Label");
-            Console.WriteLine("Actual Label\t\tDrawing\t\tHentai\t\tNeutral\t\tPornography\t\tSexy");
+            Console.WriteLine("Actual Label\t\tHentai\t\tNeutral\t\tPornography\tSexy");
             Console.WriteLine();
             foreach (var pr in results)
             {
-                Console.WriteLine($"{pr.Key}\t\t{(pr.Key != "Pornography" ? "\t" : "")}{pr.DrawingAsserts}\t\t{pr.HentaiAsserts}\t\t{pr.NeutralAsserts}\t\t{pr.PornographyAsserts}\t\t{pr.SexyAsserts}");
+                Console.WriteLine($"{pr.Key}\t\t{(pr.Key != "Pornography" ? "\t" : "")}{pr.HentaiAsserts}\t\t{pr.NeutralAsserts}\t\t{pr.PornographyAsserts}\t\t{pr.SexyAsserts}");
             }
         }
     }

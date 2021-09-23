@@ -12,11 +12,6 @@ namespace NsfwSpyNS
     public class NsfwSpyResult
     {
         /// <summary>
-        /// The drawing probability score between 0 and 1.
-        /// </summary>
-        public float Drawing { get; }
-
-        /// <summary>
         /// The hentai probability score between 0 and 1.
         /// </summary>
         public float Hentai { get; }
@@ -44,7 +39,7 @@ namespace NsfwSpyNS
         /// <summary>
         /// Whether the image is likely to be explicit. True if the sum of nsfw, hentai and sexy is equal to or above 0.5.
         /// </summary>
-        public bool IsNsfw => Hentai + Pornography + Sexy >= 0.5;
+        public bool IsNsfw => Neutral < 0.5;
 
         public NsfwSpyResult()
         {
@@ -53,7 +48,6 @@ namespace NsfwSpyNS
 
         internal NsfwSpyResult(ModelOutput modelOutput)
         {
-            Drawing = modelOutput.Score[(int)EClassificationType.Drawing];
             Hentai = modelOutput.Score[(int)EClassificationType.Hentai];
             Neutral = modelOutput.Score[(int)EClassificationType.Neutral];
             Pornography = modelOutput.Score[(int)EClassificationType.Pornography];
@@ -69,7 +63,6 @@ namespace NsfwSpyNS
         {
             var dictionary = new Dictionary<string, float>
             {
-                { "Drawing", Drawing },
                 { "Hentai", Hentai },
                 { "Neutral", Neutral },
                 { "Pornography", Pornography },
