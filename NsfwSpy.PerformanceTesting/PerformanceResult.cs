@@ -12,7 +12,6 @@ namespace NsfwSpyNS.PerformanceTesting
         public List<NsfwSpyResult> Results { get; set; }
         public int CorrectAsserts => Results.Count(r => r.PredictedLabel == Key);
         public int NsfwAsserts => Results.Count(r => r.IsNsfw);
-        public int DrawingAsserts => Results.Count(r => r.PredictedLabel == "Drawing");
         public int HentaiAsserts => Results.Count(r => r.PredictedLabel == "Hentai");
         public int NeutralAsserts => Results.Count(r => r.PredictedLabel == "Neutral");
         public int PornographyAsserts => Results.Count(r => r.PredictedLabel == "Pornography");
