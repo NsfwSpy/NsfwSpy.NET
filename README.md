@@ -15,9 +15,9 @@ NsfwSpy is a nudity/pornography image classifier built for .NET Core 2.0 and lat
 # Performance
 NsfwSpy isn't perfect, but the accuracy should be good enough to detect approximately 96% of Nsfw images, those being images that are classed as pornography, sexy or hentai.
 
-|   | Pornography | Sexy | Hentai | Neutral |
-| --- | --- | --- | --- | --- | --- |
-| Is Nsfw  <sub><sup>(pornography + sexy + hentai >= 0.5)</sup></sub> | 96.7% | 97.2% | 94.9% | 2.5% |
+|     | Pornography | Sexy | Hentai | Neutral |
+| --- | --- | --- | --- | --- |
+| Is Nsfw  <sub><sup>(pornography + sexy + hentai >= 0.5)</sup></sub> | 96.7% | 97.2% | 94.9% | 2.5% | 
 | Correctly Predicted Label | 85.5% | 84.4% | 87.8% | 97.8% |
 
 # Quick Start
