@@ -24,7 +24,7 @@ namespace NsfwSpyNS.Test
         [Fact]
         public void ClassifyImageUri_ValidUri()
         {
-            var uri = new Uri("https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/daisy-flower-1532449822.jpg");
+            var uri = new Uri("https://www.gardeningknowhow.com/wp-content/uploads/2021/07/sulfur-cosmos-mexican-aster-flowers.jpg");
 
             var nsfwSpy = new NsfwSpy();
             var result = nsfwSpy.ClassifyImage(uri);
@@ -35,7 +35,7 @@ namespace NsfwSpyNS.Test
         [Fact]
         public void ClassifyImageUri_CustomWebClient()
         {
-            var uri = new Uri("https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/daisy-flower-1532449822.jpg");
+            var uri = new Uri("https://www.gardeningknowhow.com/wp-content/uploads/2021/07/sulfur-cosmos-mexican-aster-flowers.jpg");
             var webClient = new WebClient();
             webClient.Headers["User-Agent"] = "test";
 
@@ -68,7 +68,7 @@ namespace NsfwSpyNS.Test
         [Fact]
         public async Task ClassifyImageUriAsync_ValidUri()
         {
-            var uri = new Uri("https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/daisy-flower-1532449822.jpg");
+            var uri = new Uri("https://www.gardeningknowhow.com/wp-content/uploads/2021/07/sulfur-cosmos-mexican-aster-flowers.jpg");
 
             var nsfwSpy = new NsfwSpy();
             var result = await nsfwSpy.ClassifyImageAsync(uri);
@@ -79,7 +79,7 @@ namespace NsfwSpyNS.Test
         [Fact]
         public async Task ClassifyImageUriAsync_CustomWebClient()
         {
-            var uri = new Uri("https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/daisy-flower-1532449822.jpg");
+            var uri = new Uri("https://www.gardeningknowhow.com/wp-content/uploads/2021/07/sulfur-cosmos-mexican-aster-flowers.jpg");
             var webClient = new WebClient();
             webClient.Headers["User-Agent"] = "test";
 

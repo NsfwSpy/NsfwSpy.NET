@@ -1,9 +1,11 @@
 ﻿using Microsoft.ML;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -102,19 +104,23 @@ namespace NsfwSpyNS
         /// <returns>A list of results with their associated file paths.</returns>
         public List<NsfwSpyValue> ClassifyImages(IEnumerable<string> filesPaths, Action<string, NsfwSpyResult> actionAfterEachClassify = null)
         {
-            var results = new List<NsfwSpyValue>();
+            var results = new ConcurrentBag<NsfwSpyValue>();
+            var sync = new object();
 
-            foreach (var filePath in filesPaths)
+            Parallel.ForEach(filesPaths, new ParallelOptions { MaxDegreeOfParallelism = 4 }, filePath =>
             {
                 var result = ClassifyImage(filePath);
                 var value = new NsfwSpyValue(filePath, result);
                 results.Add(value);
 
-                if (actionAfterEachClassify != null)
-                    actionAfterEachClassify.Invoke(filePath, result);
-            }
+                lock (sync)
+                {
+                    if (actionAfterEachClassify != null)
+                        actionAfterEachClassify.Invoke(filePath, result);
+                }
+            });
 
-            return results;
+            return results.ToList();
         }
 
         private NsfwSpyGifResult ClassifyGif(Image gifImage, GifOptions gifOptions = null)
