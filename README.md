@@ -97,6 +97,12 @@ Install-Package SciSharp.TensorFlow.Redist -Version 2.3.1
 dotnet add package SciSharp.TensorFlow.Redist --version 2.3.1
 ```
 
+To classify Gifs, the System.Drawing namespace must be supported via the [libgdiplus](https://github.com/mono/libgdiplus) package. This can be installed by running the following [Homebrew](https://brew.sh/) command in the terminal:
+
+```
+brew install mono-libgdiplus
+```
+
 # Linux Support
 To classify Gifs, the System.Drawing namespace must be supported via the [libgdiplus](https://github.com/mono/libgdiplus) package. This can be installed by running the following command in the terminal:
 
