@@ -10,7 +10,7 @@ namespace NsfwSpyNS.PerformanceTesting
     {
         static void Main(string[] args)
         {
-            var assetsPath = @"D:\Nsfw\Images";
+            var assetsPath = @"D:\NsfwSpy\Images";
 
             var classificationTypes = new[]
             {

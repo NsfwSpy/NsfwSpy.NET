@@ -140,8 +140,8 @@ namespace NsfwSpyNS.Test
             var nsfwSpy = new NsfwSpy();
             var result = nsfwSpy.ClassifyGif(filePath, gifOptions: gifOptions);
 
-            Assert.Single(result.Frames);
             Assert.True(result.IsNsfw);
+            Assert.True(result.Frames.Count < 181); // This Gif has 181 frames
         }
 
         [Fact]
@@ -175,7 +175,7 @@ namespace NsfwSpyNS.Test
         [Fact]
         public void ClassifyGifUri_EndEarlyOnNsfw()
         {
-            var uri = new Uri("https://media3.giphy.com/media/EdS6yxoLJ45Q4/giphy.gif");
+            var uri = new Uri("https://c.tenor.com/5y-jOowm51MAAAAd/bikini.gif");
             var gifOptions = new GifOptions
             {
                 EarlyStopOnNsfw = true
@@ -184,8 +184,8 @@ namespace NsfwSpyNS.Test
             var nsfwSpy = new NsfwSpy();
             var result = nsfwSpy.ClassifyGif(uri, gifOptions: gifOptions);
 
-            Assert.Single(result.Frames);
             Assert.True(result.IsNsfw);
+            Assert.True(result.Frames.Count < 181); // This Gif has 181 frames
         }
     }
 }

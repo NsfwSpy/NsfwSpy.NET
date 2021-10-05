@@ -14,7 +14,7 @@ namespace NsfwSpyNS.Train
             var projectDirectory = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "../../../"));
             var workspaceRelativePath = Path.Combine(projectDirectory, "Workspace");
             var saveModelPath = Path.Combine(projectDirectory, "Models");
-            var assetsPath = @"D:\Nsfw\Images";
+            var assetsPath = @"D:\NsfwSpy\Images";
 
             var mlContext = new MLContext();
 
