@@ -12,7 +12,7 @@ namespace NsfwSpyNS.Test
         [Fact]
         public void ClassifyImageByteArray_ValidByteArray()
         {
-            var filePath = Path.Combine(AppContext.BaseDirectory, @"Assets\flower.jpg");
+            var filePath = Path.Combine(AppContext.BaseDirectory, @"Assets/flower.jpg");
             var imageBytes = File.ReadAllBytes(filePath);
 
             var nsfwSpy = new NsfwSpy();
@@ -48,7 +48,7 @@ namespace NsfwSpyNS.Test
         [Fact]
         public void ClassifyImageFilePath_ValidFilePath()
         {
-            var filePath = Path.Combine(AppContext.BaseDirectory, @"Assets\flower.jpg");
+            var filePath = Path.Combine(AppContext.BaseDirectory, @"Assets/flower.jpg");
 
             var nsfwSpy = new NsfwSpy();
             var result = nsfwSpy.ClassifyImage(filePath);
@@ -59,7 +59,7 @@ namespace NsfwSpyNS.Test
         [Fact]
         public void ClassifyImageFilePath_InvalidFilePath()
         {
-            var filePath = Path.Combine(AppContext.BaseDirectory, @"Assets\filedoesnotexist.jpg");
+            var filePath = Path.Combine(AppContext.BaseDirectory, @"Assets/filedoesnotexist.jpg");
 
             var nsfwSpy = new NsfwSpy();
             Assert.Throws<FileNotFoundException>(() => nsfwSpy.ClassifyImage(filePath));
@@ -92,7 +92,7 @@ namespace NsfwSpyNS.Test
         [Fact]
         public async Task ClassifyImageFilePathAsync_ValidFilePath()
         {
-            var filePath = Path.Combine(AppContext.BaseDirectory, @"Assets\flower.jpg");
+            var filePath = Path.Combine(AppContext.BaseDirectory, @"Assets/flower.jpg");
 
             var nsfwSpy = new NsfwSpy();
             var result = await nsfwSpy.ClassifyImageAsync(filePath);
@@ -103,7 +103,7 @@ namespace NsfwSpyNS.Test
         [Fact]
         public void ClassifyGifFilePath_ValidFilePath()
         {
-            var filePath = Path.Combine(AppContext.BaseDirectory, @"Assets\cool.gif");
+            var filePath = Path.Combine(AppContext.BaseDirectory, @"Assets/cool.gif");
 
             var nsfwSpy = new NsfwSpy();
             var result = nsfwSpy.ClassifyGif(filePath);
@@ -115,7 +115,7 @@ namespace NsfwSpyNS.Test
         [Fact]
         public void ClassifyGifFilePath_ClassifyEvery2ndFrame()
         {
-            var filePath = Path.Combine(AppContext.BaseDirectory, @"Assets\cool.gif");
+            var filePath = Path.Combine(AppContext.BaseDirectory, @"Assets/cool.gif");
             var gifOptions = new GifOptions
             {
                 ClassifyEveryNthFrame = 2
@@ -131,7 +131,7 @@ namespace NsfwSpyNS.Test
         [Fact]
         public void ClassifyGifFilePath_EndEarlyOnNsfw()
         {
-            var filePath = Path.Combine(AppContext.BaseDirectory, @"Assets\bikini.gif");
+            var filePath = Path.Combine(AppContext.BaseDirectory, @"Assets/bikini.gif");
             var gifOptions = new GifOptions
             {
                 EarlyStopOnNsfw = true
@@ -140,8 +140,8 @@ namespace NsfwSpyNS.Test
             var nsfwSpy = new NsfwSpy();
             var result = nsfwSpy.ClassifyGif(filePath, gifOptions: gifOptions);
 
-            Assert.Single(result.Frames);
             Assert.True(result.IsNsfw);
+            Assert.True(result.Frames.Count < 181); // This Gif has 181 frames
         }
 
         [Fact]
@@ -175,7 +175,7 @@ namespace NsfwSpyNS.Test
         [Fact]
         public void ClassifyGifUri_EndEarlyOnNsfw()
         {
-            var uri = new Uri("https://media3.giphy.com/media/EdS6yxoLJ45Q4/giphy.gif");
+            var uri = new Uri("https://c.tenor.com/5y-jOowm51MAAAAd/bikini.gif");
             var gifOptions = new GifOptions
             {
                 EarlyStopOnNsfw = true
@@ -184,8 +184,8 @@ namespace NsfwSpyNS.Test
             var nsfwSpy = new NsfwSpy();
             var result = nsfwSpy.ClassifyGif(uri, gifOptions: gifOptions);
 
-            Assert.Single(result.Frames);
             Assert.True(result.IsNsfw);
+            Assert.True(result.Frames.Count < 181); // This Gif has 181 frames
         }
     }
 }

@@ -1,9 +1,8 @@
-﻿using Microsoft.ML;
+﻿using ImageMagick;
+using Microsoft.ML;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -107,7 +106,7 @@ namespace NsfwSpyNS
             var results = new ConcurrentBag<NsfwSpyValue>();
             var sync = new object();
 
-            Parallel.ForEach(filesPaths, new ParallelOptions { MaxDegreeOfParallelism = 4 }, filePath =>
+            Parallel.ForEach(filesPaths, filePath =>
             {
                 var result = ClassifyImage(filePath);
                 var value = new NsfwSpyValue(filePath, result);
@@ -123,7 +122,7 @@ namespace NsfwSpyNS
             return results.ToList();
         }
 
-        private NsfwSpyGifResult ClassifyGif(Image gifImage, GifOptions gifOptions = null)
+        private NsfwSpyGifResult ClassifyGif(byte[] gifImage, GifOptions gifOptions = null)
         {
             if (gifOptions == null)
                 gifOptions = new GifOptions();
@@ -131,30 +130,37 @@ namespace NsfwSpyNS
             if (gifOptions.ClassifyEveryNthFrame < 1)
                 throw new Exception("GifOptions.ClassifyEveryNthFrame must not be less than 1.");
 
-            var results = new Dictionary<int, NsfwSpyResult>();
-            var dimension = new FrameDimension(gifImage.FrameDimensionsList[0]);
-            var frameCount = gifImage.GetFrameCount(dimension);
+            var results = new ConcurrentDictionary<int, NsfwSpyResult>();
 
-            for (int i = 0; i < frameCount; i++)
+            using (var collection = new MagickImageCollection(gifImage))
             {
-                if (i % gifOptions.ClassifyEveryNthFrame != 0)
-                    continue;
+                var frameCount = collection.Count;
 
-                gifImage.SelectActiveFrame(dimension, i);
-                using (var ms = new MemoryStream())
+                Parallel.For(0, frameCount, (i, state) =>
                 {
-                    gifImage.Save(ms, ImageFormat.Jpeg);
-                    var frameData = ms.ToArray();
-                    var result = ClassifyImage(frameData);
-                    results.Add(i, result);
+                    if (i % gifOptions.ClassifyEveryNthFrame != 0)
+                        return;
 
-                    // Stop classifying frames if Nsfw frame is found
-                    if (result.IsNsfw && gifOptions.EarlyStopOnNsfw)
-                        break;
-                }
+                    if (state.ShouldExitCurrentIteration)
+                        return;
+
+                    var frame = collection[i];
+
+                    using (var ms = new MemoryStream())
+                    {
+                        var frameData = frame.ToByteArray();
+                        var result = ClassifyImage(frameData);
+                        results.GetOrAdd(i, result);
+
+                        // Stop classifying frames if Nsfw frame is found
+                        if (result.IsNsfw && gifOptions.EarlyStopOnNsfw)
+                            state.Break();
+                    }
+                });
             }
 
-            var gifResult = new NsfwSpyGifResult(results);
+            var resultDictionary = results.OrderBy(r => r.Key).ToDictionary(r => r.Key, r => r.Value);
+            var gifResult = new NsfwSpyGifResult(resultDictionary);
             return gifResult;
         }
 
@@ -166,7 +172,7 @@ namespace NsfwSpyNS
         /// <returns>A NsfwSpyGifResult with results for each frame classified.</returns>
         public NsfwSpyGifResult ClassifyGif(string filePath, GifOptions gifOptions = null)
         {
-            var gifImage = Image.FromFile(filePath);
+            var gifImage = File.ReadAllBytes(filePath);
             var results = ClassifyGif(gifImage, gifOptions);
             return results;
         }
@@ -182,12 +188,9 @@ namespace NsfwSpyNS
         {
             if (webClient == null) webClient = new WebClient();
 
-            using (var stream = webClient.OpenRead(uri))
-            {
-                var gifImage = Image.FromStream(stream);
-                var results = ClassifyGif(gifImage, gifOptions);
-                return results;
-            }
+            var gifImage = webClient.DownloadData(uri);
+            var results = ClassifyGif(gifImage, gifOptions);
+            return results;
         }
     }
 }
