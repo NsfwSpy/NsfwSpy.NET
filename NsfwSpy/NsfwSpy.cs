@@ -1,6 +1,5 @@
-﻿using Microsoft.ML;
-using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.Formats.Jpeg;
+﻿using ImageMagick;
+using Microsoft.ML;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -123,7 +122,7 @@ namespace NsfwSpyNS
             return results.ToList();
         }
 
-        private NsfwSpyGifResult ClassifyGif(Image gifImage, GifOptions gifOptions = null)
+        private NsfwSpyGifResult ClassifyGif(byte[] gifImage, GifOptions gifOptions = null)
         {
             if (gifOptions == null)
                 gifOptions = new GifOptions();
@@ -132,31 +131,33 @@ namespace NsfwSpyNS
                 throw new Exception("GifOptions.ClassifyEveryNthFrame must not be less than 1.");
 
             var results = new ConcurrentDictionary<int, NsfwSpyResult>();
-            var frameCount = gifImage.Frames.Count;
-            var jpegEncoder = new JpegEncoder();
 
-            Parallel.For(0, frameCount, (i, state) =>
+            using (var collection = new MagickImageCollection(gifImage))
             {
-                if (i % gifOptions.ClassifyEveryNthFrame != 0)
-                    return;
+                var frameCount = collection.Count;
 
-                if (state.ShouldExitCurrentIteration) 
-                    return;
-
-                var frame = gifImage.Frames.CloneFrame(i);
-
-                using (var ms = new MemoryStream())
+                Parallel.For(0, frameCount, (i, state) =>
                 {
-                    frame.Save(ms, jpegEncoder);
-                    var frameData = ms.ToArray();
-                    var result = ClassifyImage(frameData);
-                    results.GetOrAdd(i, result);
+                    if (i % gifOptions.ClassifyEveryNthFrame != 0)
+                        return;
 
-                    // Stop classifying frames if Nsfw frame is found
-                    if (result.IsNsfw && gifOptions.EarlyStopOnNsfw)
-                        state.Break();
-                }
-            });
+                    if (state.ShouldExitCurrentIteration)
+                        return;
+
+                    var frame = collection[i];
+
+                    using (var ms = new MemoryStream())
+                    {
+                        var frameData = frame.ToByteArray();
+                        var result = ClassifyImage(frameData);
+                        results.GetOrAdd(i, result);
+
+                        // Stop classifying frames if Nsfw frame is found
+                        if (result.IsNsfw && gifOptions.EarlyStopOnNsfw)
+                            state.Break();
+                    }
+                });
+            }
 
             var resultDictionary = results.OrderBy(r => r.Key).ToDictionary(r => r.Key, r => r.Value);
             var gifResult = new NsfwSpyGifResult(resultDictionary);
@@ -171,7 +172,7 @@ namespace NsfwSpyNS
         /// <returns>A NsfwSpyGifResult with results for each frame classified.</returns>
         public NsfwSpyGifResult ClassifyGif(string filePath, GifOptions gifOptions = null)
         {
-            var gifImage = Image.Load(filePath);
+            var gifImage = File.ReadAllBytes(filePath);
             var results = ClassifyGif(gifImage, gifOptions);
             return results;
         }
@@ -187,12 +188,9 @@ namespace NsfwSpyNS
         {
             if (webClient == null) webClient = new WebClient();
 
-            using (var stream = webClient.OpenRead(uri))
-            {
-                var gifImage = Image.Load(stream);
-                var results = ClassifyGif(gifImage, gifOptions);
-                return results;
-            }
+            var gifImage = webClient.DownloadData(uri);
+            var results = ClassifyGif(gifImage, gifOptions);
+            return results;
         }
     }
 }
