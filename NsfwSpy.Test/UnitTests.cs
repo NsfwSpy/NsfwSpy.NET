@@ -101,6 +101,19 @@ namespace NsfwSpyNS.Test
         }
 
         [Fact]
+        public void ClassifyGifByteArray_ValidByteArray()
+        {
+            var filePath = Path.Combine(AppContext.BaseDirectory, @"Assets/cool.gif");
+            var imageBytes = File.ReadAllBytes(filePath);
+
+            var nsfwSpy = new NsfwSpy();
+            var result = nsfwSpy.ClassifyGif(imageBytes);
+
+            Assert.Equal(10, result.Frames.Count);
+            Assert.False(result.IsNsfw);
+        }
+
+        [Fact]
         public void ClassifyGifFilePath_ValidFilePath()
         {
             var filePath = Path.Combine(AppContext.BaseDirectory, @"Assets/cool.gif");

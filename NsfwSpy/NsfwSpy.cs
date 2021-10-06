@@ -122,7 +122,13 @@ namespace NsfwSpyNS
             return results.ToList();
         }
 
-        private NsfwSpyGifResult ClassifyGif(byte[] gifImage, GifOptions gifOptions = null)
+        /// <summary>
+        /// Classify a .gif file from a byte array.
+        /// </summary>
+        /// <param name="gifImage">The Gif content read as a byte array.</param>
+        /// <param name="gifOptions">GifOptions to customise how the frames of the file are classified.</param>
+        /// <returns>A NsfwSpyGifResult with results for each frame classified.</returns>
+        public NsfwSpyGifResult ClassifyGif(byte[] gifImage, GifOptions gifOptions = null)
         {
             if (gifOptions == null)
                 gifOptions = new GifOptions();
