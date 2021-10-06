@@ -9,6 +9,8 @@ namespace NsfwSpyNS
     {
         NsfwSpyGifResult ClassifyGif(string filePath, GifOptions gifOptions = null);
         NsfwSpyGifResult ClassifyGif(Uri uri, WebClient webClient = null, GifOptions gifOptions = null);
+        Task<NsfwSpyGifResult> ClassifyGifAsync(string filePath, GifOptions gifOptions = null);
+        Task<NsfwSpyGifResult> ClassifyGifAsync(Uri uri, WebClient webClient = null, GifOptions gifOptions = null);
         NsfwSpyResult ClassifyImage(byte[] imageData);
         NsfwSpyResult ClassifyImage(string filePath);
         NsfwSpyResult ClassifyImage(Uri uri, WebClient webClient = null);

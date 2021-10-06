@@ -200,5 +200,29 @@ namespace NsfwSpyNS.Test
             Assert.True(result.IsNsfw);
             Assert.True(result.Frames.Count < 181); // This Gif has 181 frames
         }
+
+        [Fact]
+        public async Task ClassifyGifFilePathAsync_ValidFilePath()
+        {
+            var filePath = Path.Combine(AppContext.BaseDirectory, @"Assets/cool.gif");
+
+            var nsfwSpy = new NsfwSpy();
+            var result = await nsfwSpy.ClassifyGifAsync(filePath);
+
+            Assert.Equal(10, result.Frames.Count);
+            Assert.False(result.IsNsfw);
+        }
+
+        [Fact]
+        public async Task ClassifyGifUriAsync_ValidUri()
+        {
+            var uri = new Uri("https://media2.giphy.com/media/62PP2yEIAZF6g/giphy.gif");
+
+            var nsfwSpy = new NsfwSpy();
+            var result = await nsfwSpy.ClassifyGifAsync(uri);
+
+            Assert.Equal(10, result.Frames.Count);
+            Assert.False(result.IsNsfw);
+        }
     }
 }

@@ -198,5 +198,34 @@ namespace NsfwSpyNS
             var results = ClassifyGif(gifImage, gifOptions);
             return results;
         }
+
+        /// <summary>
+        /// Classify a .gif file from a path asynchronously.
+        /// </summary>
+        /// <param name="filePath">Path to the .gif to be classified.</param>
+        /// <param name="gifOptions">GifOptions to customise how the frames of the file are classified.</param>
+        /// <returns>A NsfwSpyGifResult with results for each frame classified.</returns>
+        public async Task<NsfwSpyGifResult> ClassifyGifAsync(string filePath, GifOptions gifOptions = null)
+        {
+            var gifImage = await File.ReadAllBytesAsync(filePath);
+            var results = ClassifyGif(gifImage, gifOptions);
+            return results;
+        }
+
+        /// <summary>
+        /// Classify a .gif file  from a web url asynchronously.
+        /// </summary>
+        /// <param name="uri">Web address of the Gif to be classified.</param>
+        /// <param name="webClient">A custom WebClient to download the Gif with.</param>
+        /// <param name="gifOptions">GifOptions to customise how the frames of the file are classified.</param>
+        /// <returns>A NsfwSpyGifResult with results for each frame classified.</returns>
+        public async Task<NsfwSpyGifResult> ClassifyGifAsync(Uri uri, WebClient webClient = null, GifOptions gifOptions = null)
+        {
+            if (webClient == null) webClient = new WebClient();
+
+            var gifImage = await webClient.DownloadDataTaskAsync(uri);
+            var results = ClassifyGif(gifImage, gifOptions);
+            return results;
+        }
     }
 }
