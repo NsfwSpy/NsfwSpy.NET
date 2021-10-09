@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NsfwSpy.PerformanceTesting"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NsfwSpy.Test", "NsfwSpy.Test\NsfwSpy.Test.csproj", "{3DE7054D-D7B5-4315-ADEF-5E4BA2D21138}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NsfwSpy.App", "NsfwSpy.App\NsfwSpy.App.csproj", "{351C86B4-45CB-4AB4-8C74-B42B6217A069}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{3DE7054D-D7B5-4315-ADEF-5E4BA2D21138}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3DE7054D-D7B5-4315-ADEF-5E4BA2D21138}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3DE7054D-D7B5-4315-ADEF-5E4BA2D21138}.Release|Any CPU.Build.0 = Release|Any CPU
+		{351C86B4-45CB-4AB4-8C74-B42B6217A069}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{351C86B4-45CB-4AB4-8C74-B42B6217A069}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{351C86B4-45CB-4AB4-8C74-B42B6217A069}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{351C86B4-45CB-4AB4-8C74-B42B6217A069}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
