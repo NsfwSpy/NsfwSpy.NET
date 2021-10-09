@@ -28,7 +28,7 @@ namespace NsfwSpyNS.PerformanceTesting
                 var directory = Path.Combine(assetsPath, classificationType);
                 var files = Directory.GetFiles(directory).OrderBy(f => Guid.NewGuid()).ToList();
 
-                var length = files.Count > 10000 ? 10000 : files.Count;
+                var length = files.Count > 20000 ? 20000 : files.Count;
                 files = files.Take(length).ToList();
 
                 var pr = new PerformanceResult(classificationType);
@@ -57,6 +57,14 @@ namespace NsfwSpyNS.PerformanceTesting
             foreach (var pr in results)
             {
                 Console.WriteLine($"{pr.Key}\t\t{(pr.Key != "Pornography" ? "\t" : "")}{pr.HentaiAsserts}\t\t{pr.NeutralAsserts}\t\t{pr.PornographyAsserts}\t\t{pr.SexyAsserts}");
+            }
+
+            Console.WriteLine(Environment.NewLine);
+            Console.WriteLine("Average Confidence\n");
+
+            foreach (var pr in results)
+            {
+                Console.WriteLine($"{pr.Key}\t\t{(pr.Key != "Pornography" ? "\t" : "")}{pr.Results.Sum(r => r.ToDictionary()[pr.Key]) / pr.Results.Count}");
             }
         }
     }
