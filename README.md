@@ -1,7 +1,7 @@
 <img src="https://raw.githubusercontent.com/d00ML0rDz/NsfwSpy/main/_art/NsfwSpy-Logo.jpg" alt="NsfwSpy Logo" width="400"/>
 
 # Introduction
-NsfwSpy is a nudity/pornography image classifier built for .NET Core 2.0 and later, with support for Windows, [macOS](#macos-support) and Linux, to aid in moderating user-generated content for various different application types, written in C#. The [ML.NET](https://github.com/dotnet/machinelearning) model has been trained against the ResNet V250 neural net architecture with 395,000 images (90GB), from 4 different categories:
+NsfwSpy is a nudity/pornography image classifier built for .NET Core 2.0 and later, with support for Windows, [macOS](#macos-support) and Linux, to aid in moderating user-generated content for various different application types, written in C#. The [ML.NET](https://github.com/dotnet/machinelearning) model has been trained against the ResNet V250 neural net architecture with 405,000 images (98GB), from 4 different categories:
 
 | Label       | Description |
 | ----------- | ----------- |
@@ -17,8 +17,8 @@ NsfwSpy isn't perfect, but the accuracy should be good enough to detect approxim
 
 |     | Pornography | Sexy | Hentai | Neutral |
 | --- | --- | --- | --- | --- |
-| Is Nsfw  <sub><sup>(pornography + sexy + hentai >= 0.5)</sup></sub> | 96.7% | 97.2% | 94.9% | 2.5% | 
-| Correctly Predicted Label | 85.5% | 84.4% | 87.8% | 97.8% |
+| Is Nsfw  <sub><sup>(pornography + sexy + hentai >= 0.5)</sup></sub> | 96.4% | 96.6% | 95.2% | 2.8% | 
+| Correctly Predicted Label | 86.4% | 83.1% | 87.3% | 97.5% |
 
 # Quick Start
 This project is available as a [NuGet](https://www.nuget.org/packages/NsfwSpy/) package and can be installed with the following commands:
