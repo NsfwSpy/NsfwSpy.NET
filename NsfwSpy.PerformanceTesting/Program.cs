@@ -28,7 +28,7 @@ namespace NsfwSpyNS.PerformanceTesting
                 var directory = Path.Combine(assetsPath, classificationType);
                 var files = Directory.GetFiles(directory).OrderBy(f => Guid.NewGuid()).ToList();
 
-                var length = files.Count > 20000 ? 20000 : files.Count;
+                var length = files.Count > 10000 ? 10000 : files.Count;
                 files = files.Take(length).ToList();
 
                 var pr = new PerformanceResult(classificationType);
