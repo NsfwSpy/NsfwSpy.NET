@@ -254,18 +254,14 @@ namespace NsfwSpyNS
                         return;
 
                     var frame = collection[i];
+                    frame.Format = MagickFormat.Jpg;
 
-                    using (var ms = new MemoryStream())
-                    {
-                        frame.Format = MagickFormat.Jpg;
+                    var result = ClassifyImage(frame.ToByteArray());
+                    results.GetOrAdd(i, result);
 
-                        var result = ClassifyImage(frame.ToByteArray());
-                        results.GetOrAdd(i, result);
-
-                        // Stop classifying frames if Nsfw frame is found
-                        if (result.IsNsfw && videoOptions.EarlyStopOnNsfw)
-                            state.Break();
-                    }
+                    // Stop classifying frames if Nsfw frame is found
+                    if (result.IsNsfw && videoOptions.EarlyStopOnNsfw)
+                        state.Break();
                 });
             }
 
