@@ -8,7 +8,7 @@ namespace NsfwSpyNS
     /// <summary>
     /// The result from classifying a Gif file.
     /// </summary>
-    public class NsfwSpyGifResult
+    public class NsfwSpyFramesResult
     {
         /// <summary>
         /// The NsfwSpyResults for each of the frames classified with the key being the frame index.
@@ -25,7 +25,7 @@ namespace NsfwSpyNS
         /// </summary>
         public bool IsNsfw => Frames.Any(f => f.Value.IsNsfw);
 
-        public NsfwSpyGifResult(Dictionary<int, NsfwSpyResult> frames)
+        public NsfwSpyFramesResult(Dictionary<int, NsfwSpyResult> frames)
         {
             Frames = frames;
         }

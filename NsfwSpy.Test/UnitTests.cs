@@ -129,13 +129,13 @@ namespace NsfwSpyNS.Test
         public void ClassifyGifFilePath_ClassifyEvery2ndFrame()
         {
             var filePath = Path.Combine(AppContext.BaseDirectory, @"Assets/cool.gif");
-            var gifOptions = new GifOptions
+            var videoOptions = new VideoOptions
             {
                 ClassifyEveryNthFrame = 2
             };
 
             var nsfwSpy = new NsfwSpy();
-            var result = nsfwSpy.ClassifyGif(filePath, gifOptions);
+            var result = nsfwSpy.ClassifyGif(filePath, videoOptions);
 
             Assert.Equal(5, result.Frames.Count);
             Assert.False(result.IsNsfw);
@@ -145,13 +145,13 @@ namespace NsfwSpyNS.Test
         public void ClassifyGifFilePath_EndEarlyOnNsfw()
         {
             var filePath = Path.Combine(AppContext.BaseDirectory, @"Assets/bikini.gif");
-            var gifOptions = new GifOptions
+            var videoOptions = new VideoOptions
             {
                 EarlyStopOnNsfw = true
             };
 
             var nsfwSpy = new NsfwSpy();
-            var result = nsfwSpy.ClassifyGif(filePath, gifOptions: gifOptions);
+            var result = nsfwSpy.ClassifyGif(filePath, videoOptions: videoOptions);
 
             Assert.True(result.IsNsfw);
             Assert.True(result.Frames.Count < 181); // This Gif has 181 frames
@@ -173,13 +173,13 @@ namespace NsfwSpyNS.Test
         public void ClassifyGifUri_ClassifyEvery2ndFrame()
         {
             var uri = new Uri("https://media2.giphy.com/media/62PP2yEIAZF6g/giphy.gif");
-            var gifOptions = new GifOptions
+            var videoOptions = new VideoOptions
             {
                 ClassifyEveryNthFrame = 2
             };
 
             var nsfwSpy = new NsfwSpy();
-            var result = nsfwSpy.ClassifyGif(uri, gifOptions: gifOptions);
+            var result = nsfwSpy.ClassifyGif(uri, videoOptions: videoOptions);
 
             Assert.Equal(5, result.Frames.Count);
             Assert.False(result.IsNsfw);
@@ -189,13 +189,13 @@ namespace NsfwSpyNS.Test
         public void ClassifyGifUri_EndEarlyOnNsfw()
         {
             var uri = new Uri("https://c.tenor.com/5y-jOowm51MAAAAd/bikini.gif");
-            var gifOptions = new GifOptions
+            var videoOptions = new VideoOptions
             {
                 EarlyStopOnNsfw = true
             };
 
             var nsfwSpy = new NsfwSpy();
-            var result = nsfwSpy.ClassifyGif(uri, gifOptions: gifOptions);
+            var result = nsfwSpy.ClassifyGif(uri, videoOptions: videoOptions);
 
             Assert.True(result.IsNsfw);
             Assert.True(result.Frames.Count < 181); // This Gif has 181 frames
@@ -223,6 +223,151 @@ namespace NsfwSpyNS.Test
 
             Assert.Equal(10, result.Frames.Count);
             Assert.False(result.IsNsfw);
+        }
+
+        [Theory]
+        [InlineData("bikini.avi")]
+        [InlineData("bikini.mkv")]
+        [InlineData("bikini.mp4")]
+        [InlineData("bikini.webm")]
+        public void ClassifyVideoByteArray_ValidByteArray(string filename)
+        {
+            var filePath = Path.Combine(AppContext.BaseDirectory, $@"Assets\{filename}");
+            var imageBytes = File.ReadAllBytes(filePath);
+
+            var nsfwSpy = new NsfwSpy();
+            var result = nsfwSpy.ClassifyVideo(imageBytes);
+
+            Assert.Equal(181, result.Frames.Count);
+            Assert.True(result.IsNsfw);
+        }
+
+        [Theory]
+        [InlineData("bikini.avi")]
+        [InlineData("bikini.mkv")]
+        [InlineData("bikini.mp4")]
+        [InlineData("bikini.webm")]
+        public void ClassifyVideoFilePath_ValidFilePath(string filename)
+        {
+            var filePath = Path.Combine(AppContext.BaseDirectory, $@"Assets\{filename}");
+
+            var nsfwSpy = new NsfwSpy();
+            var result = nsfwSpy.ClassifyVideo(filePath);
+
+            Assert.Equal(181, result.Frames.Count);
+            Assert.True(result.IsNsfw);
+        }
+
+        [Theory]
+        [InlineData("bikini.avi")]
+        [InlineData("bikini.mkv")]
+        [InlineData("bikini.mp4")]
+        [InlineData("bikini.webm")]
+        public void ClassifyVideoFilePath_ClassifyEvery2ndFrame(string filename)
+        {
+            var filePath = Path.Combine(AppContext.BaseDirectory, $@"Assets\{filename}");
+            var videoOptions = new VideoOptions
+            {
+                ClassifyEveryNthFrame = 2
+            };
+
+            var nsfwSpy = new NsfwSpy();
+            var result = nsfwSpy.ClassifyVideo(filePath, videoOptions);
+
+            Assert.Equal(91, result.Frames.Count);
+            Assert.True(result.IsNsfw);
+        }
+
+        [Theory]
+        [InlineData("bikini.avi")]
+        [InlineData("bikini.mkv")]
+        [InlineData("bikini.mp4")]
+        [InlineData("bikini.webm")]
+        public void ClassifyVideoFilePath_EndEarlyOnNsfw(string filename)
+        {
+            var filePath = Path.Combine(AppContext.BaseDirectory, $@"Assets\{filename}");
+            var videoOptions = new VideoOptions
+            {
+                EarlyStopOnNsfw = true
+            };
+
+            var nsfwSpy = new NsfwSpy();
+            var result = nsfwSpy.ClassifyVideo(filePath, videoOptions: videoOptions);
+
+            Assert.True(result.IsNsfw);
+            Assert.True(result.Frames.Count < 181); // This video has 181 frames
+        }
+
+        [Fact]
+        public void ClassifyVideoUri_ValidUri()
+        {
+            var uri = new Uri("https://i.imgur.com/MjTH5ZS.mp4");
+
+            var nsfwSpy = new NsfwSpy();
+            var result = nsfwSpy.ClassifyVideo(uri);
+
+            Assert.Equal(120, result.Frames.Count);
+            Assert.True(result.IsNsfw);
+        }
+
+        [Fact]
+        public void ClassifyVideoUri_ClassifyEvery2ndFrame()
+        {
+            var uri = new Uri("https://i.imgur.com/MjTH5ZS.mp4");
+            var videoOptions = new VideoOptions
+            {
+                ClassifyEveryNthFrame = 2
+            };
+
+            var nsfwSpy = new NsfwSpy();
+            var result = nsfwSpy.ClassifyVideo(uri, videoOptions: videoOptions);
+
+            Assert.Equal(60, result.Frames.Count);
+            Assert.True(result.IsNsfw);
+        }
+
+        [Fact]
+        public void ClassifyVideoUri_EndEarlyOnNsfw()
+        {
+            var uri = new Uri("https://i.imgur.com/MjTH5ZS.mp4");
+            var videoOptions = new VideoOptions
+            {
+                EarlyStopOnNsfw = true
+            };
+
+            var nsfwSpy = new NsfwSpy();
+            var result = nsfwSpy.ClassifyVideo(uri, videoOptions: videoOptions);
+
+            Assert.True(result.IsNsfw);
+            Assert.True(result.Frames.Count < 120); // This video has 120 frames
+        }
+
+        [Theory]
+        [InlineData("bikini.avi")]
+        [InlineData("bikini.mkv")]
+        [InlineData("bikini.mp4")]
+        [InlineData("bikini.webm")]
+        public async Task ClassifyVideoFilePathAsync_ValidFilePath(string filename)
+        {
+            var filePath = Path.Combine(AppContext.BaseDirectory, $@"Assets\{filename}");
+
+            var nsfwSpy = new NsfwSpy();
+            var result = await nsfwSpy.ClassifyVideoAsync(filePath);
+
+            Assert.Equal(181, result.Frames.Count);
+            Assert.True(result.IsNsfw);
+        }
+
+        [Fact]
+        public async Task ClassifyVideoUriAsync_ValidUri()
+        {
+            var uri = new Uri("https://i.imgur.com/MjTH5ZS.mp4");
+
+            var nsfwSpy = new NsfwSpy();
+            var result = await nsfwSpy.ClassifyVideoAsync(uri);
+
+            Assert.Equal(120, result.Frames.Count);
+            Assert.True(result.IsNsfw);
         }
     }
 }
