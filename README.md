@@ -101,7 +101,7 @@ To be able to make use of the ClassifyVideo methods, [FFmpeg](https://www.ffmpeg
 Follow [this guide](https://www.geeksforgeeks.org/how-to-install-ffmpeg-on-windows/) to download FFmpeg, extract it to your C:\ drive and add the required environment path variable.
 
 ## macOS
-Install FFmpeg on macOS using Homebrew via the following command:
+Install FFmpeg on macOS using [Homebrew](https://brew.sh/) via the following command:
 ```
 brew install ffmpeg
 ```
