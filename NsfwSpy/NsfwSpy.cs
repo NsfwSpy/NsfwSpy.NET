@@ -231,7 +231,7 @@ namespace NsfwSpyNS
         /// <param name="video">The video content read as a byte array.</param>
         /// <param name="videoOptions">VideoOptions to customise how the frames of the file are classified.</param>
         /// <returns>A NsfwSpyFramesResult with results for each frame classified.</returns>
-        public NsfwSpyFramesResult ClassifyMp4(byte[] video, VideoOptions videoOptions = null)
+        public NsfwSpyFramesResult ClassifyVideo(byte[] video, VideoOptions videoOptions = null)
         {
             if (videoOptions == null)
                 videoOptions = new VideoOptions();
@@ -276,10 +276,10 @@ namespace NsfwSpyNS
         /// <param name="filePath">Path to the video to be classified.</param>
         /// <param name="videoOptions">VideoOptions to customise how the frames of the file are classified.</param>
         /// <returns>A NsfwSpyFramesResult with results for each frame classified.</returns>
-        public NsfwSpyFramesResult ClassifyMp4(string filePath, VideoOptions videoOptions = null)
+        public NsfwSpyFramesResult ClassifyVideo(string filePath, VideoOptions videoOptions = null)
         {
             var video = File.ReadAllBytes(filePath);
-            var results = ClassifyMp4(video, videoOptions);
+            var results = ClassifyVideo(video, videoOptions);
             return results;
         }
 
@@ -290,12 +290,12 @@ namespace NsfwSpyNS
         /// <param name="webClient">A custom WebClient to download the video with.</param>
         /// <param name="videoOptions">VideoOptions to customise how the frames of the file are classified.</param>
         /// <returns>A NsfwSpyFramesResult with results for each frame classified.</returns>
-        public NsfwSpyFramesResult ClassifyMp4(Uri uri, WebClient webClient = null, VideoOptions videoOptions = null)
+        public NsfwSpyFramesResult ClassifyVideo(Uri uri, WebClient webClient = null, VideoOptions videoOptions = null)
         {
             if (webClient == null) webClient = new WebClient();
 
             var video = webClient.DownloadData(uri);
-            var results = ClassifyMp4(video, videoOptions);
+            var results = ClassifyVideo(video, videoOptions);
             return results;
         }
 
@@ -305,10 +305,10 @@ namespace NsfwSpyNS
         /// <param name="filePath">Path to the video to be classified.</param>
         /// <param name="videoOptions">VideoOptions to customise how the frames of the file are classified.</param>
         /// <returns>A NsfwSpyFramesResult with results for each frame classified.</returns>
-        public async Task<NsfwSpyFramesResult> ClassifyMp4Async(string filePath, VideoOptions videoOptions = null)
+        public async Task<NsfwSpyFramesResult> ClassifyVideoAsync(string filePath, VideoOptions videoOptions = null)
         {
             var video = await File.ReadAllBytesAsync(filePath);
-            var results = ClassifyMp4(video, videoOptions);
+            var results = ClassifyVideo(video, videoOptions);
             return results;
         }
 
@@ -319,12 +319,12 @@ namespace NsfwSpyNS
         /// <param name="webClient">A custom WebClient to download the video with.</param>
         /// <param name="videoOptions">VideoOptions to customise how the frames of the file are classified.</param>
         /// <returns>A NsfwSpyFramesResult with results for each frame classified.</returns>
-        public async Task<NsfwSpyFramesResult> ClassifyMp4Async(Uri uri, WebClient webClient = null, VideoOptions videoOptions = null)
+        public async Task<NsfwSpyFramesResult> ClassifyVideoAsync(Uri uri, WebClient webClient = null, VideoOptions videoOptions = null)
         {
             if (webClient == null) webClient = new WebClient();
 
             var video = await webClient.DownloadDataTaskAsync(uri);
-            var results = ClassifyMp4(video, videoOptions);
+            var results = ClassifyVideo(video, videoOptions);
             return results;
         }
     }

@@ -5,7 +5,7 @@ using System.Text;
 namespace NsfwSpyNS
 {
     /// <summary>
-    /// Customise how the frames of a Gif file are classified.
+    /// Customise how the frames of a video file are classified.
     /// </summary>
     public class VideoOptions
     {
