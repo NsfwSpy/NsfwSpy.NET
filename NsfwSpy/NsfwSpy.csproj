@@ -17,7 +17,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FFMpegCore" Version="4.6.0" />
     <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="8.3.2" />
     <PackageReference Include="Microsoft.ML" Version="1.6.0" />
     <PackageReference Include="Microsoft.ML.Vision" Version="1.6.0" />
