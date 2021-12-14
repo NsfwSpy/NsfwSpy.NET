@@ -100,7 +100,6 @@ To be able to make use of the ClassifyVideo methods, [FFmpeg](https://www.ffmpeg
 ## Windows 
 Follow [this guide](https://www.geeksforgeeks.org/how-to-install-ffmpeg-on-windows/) to download FFmpeg, extract it to your C:\ drive and add the required environment path variable.
 
-<!--
 ## macOS
 Install FFmpeg on macOS using [Homebrew](https://brew.sh/) via the following command:
 ```
@@ -112,10 +111,6 @@ Install FFmpeg on Ubuntu using the following command:
 ```
 sudo apt install ffmpeg
 ```
--->
-
-## macOS and Linux
-Currently ClassifyVideo doesn't seem to work in macOS and Linux but we are in the process of rectifying this.
 
 # GPU Support
 To get GPU support working, please follow the prerequisite steps [here](https://docs.microsoft.com/en-us/dotnet/api/microsoft.ml.vision.imageclassificationtrainer?view=ml-dotnet&fbclid=IwAR3Ng6Pe1BWDZ3hR20tchutSozmdMojxvpy3pqdwA3fZ_OEstU8C-ptSRZw#gpu-support) to install [CUDA v10.1](https://developer.nvidia.com/cuda-10.1-download-archive-update2) and [CUDNN v7.6.4](https://developer.nvidia.com/rdp/cudnn-download). Later versions do not work (as I tried with CUDA v11.4). The SciSharp.TensorFlow.Redist-Windows-GPU and SciSharp.TensorFlow.Redist-Linux-GPU packages are already included as part of the NsfwSpy package.
