@@ -1,5 +1,4 @@
-﻿using FFMpegCore;
-using ImageMagick;
+﻿using ImageMagick;
 using Microsoft.ML;
 using System;
 using System.Collections.Concurrent;
