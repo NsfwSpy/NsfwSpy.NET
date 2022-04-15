@@ -14,7 +14,7 @@ namespace NsfwSpyNS.Train
             var projectDirectory = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "../../../"));
             var workspaceRelativePath = Path.Combine(projectDirectory, "Workspace");
             var saveModelPath = Path.Combine(projectDirectory, "Models");
-            var assetsPath = @"D:\NsfwSpy\Images";
+            var assetsPath = @"E:\NsfwSpy\Images";
 
             var mlContext = new MLContext();
 
@@ -60,6 +60,9 @@ namespace NsfwSpyNS.Train
                 .Append(mlContext.Transforms.Conversion.MapKeyToValue("PredictedLabel"));
 
             var trainedModel = trainingPipeline.Fit(trainSet);
+
+            if (!Directory.Exists(saveModelPath))
+                Directory.CreateDirectory(saveModelPath);
 
             saveModelPath = Path.Combine(saveModelPath, "NsfwSpyModel.zip");
             mlContext.Model.Save(trainedModel, trainSet.Schema, saveModelPath);
