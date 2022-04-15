@@ -10,7 +10,8 @@ namespace NsfwSpyNS.PerformanceTesting
     {
         static void Main(string[] args)
         {
-            var assetsPath = @"D:\NsfwSpy\Images";
+            var assetsPath = @"E:\NsfwSpy\Images";
+            var testImagesPath = @"E:\NsfwSpy\Test";
 
             var classificationTypes = new[]
             {
@@ -25,15 +26,34 @@ namespace NsfwSpyNS.PerformanceTesting
 
             foreach (var classificationType in classificationTypes)
             {
-                var directory = Path.Combine(assetsPath, classificationType);
-                var files = Directory.GetFiles(directory).OrderBy(f => Guid.NewGuid()).ToList();
+                var testFilesDirectory = Path.Combine(testImagesPath, classificationType);
+                var testFiles = Directory.Exists(testFilesDirectory) ? Directory.GetFiles(testFilesDirectory).ToList() : new List<string>();
 
-                var length = files.Count > 10000 ? 10000 : files.Count;
-                files = files.Take(length).ToList();
+                if (!testFiles.Any())
+                {
+                    var directory = Path.Combine(assetsPath, classificationType);
+                    var files = Directory.GetFiles(directory).OrderBy(f => Guid.NewGuid()).ToList();
+
+                    var length = files.Count > 10000 ? 10000 : files.Count;
+                    files = files.Take(length).ToList();
+
+                    Console.WriteLine($"Copying {classificationType} test files...");
+
+                    if (!Directory.Exists(testFilesDirectory))
+                        Directory.CreateDirectory(testFilesDirectory);
+
+                    Parallel.ForEach(files, file => {
+                        var filename = Path.GetFileName(file);
+                        var dest = Path.Combine(testFilesDirectory, filename);
+                        File.Copy(file, dest);
+                    });
+
+                    testFiles = Directory.GetFiles(testFilesDirectory).ToList();
+                }
 
                 var pr = new PerformanceResult(classificationType);
 
-                nsfwSpy.ClassifyImages(files, (filePath, result) =>
+                nsfwSpy.ClassifyImages(testFiles, (filePath, result) =>
                 {
                     pr.Results.Add(result);
                     Console.WriteLine($"{pr.Key} | Correct Asserts: {pr.CorrectAsserts} / {pr.TotalAsserts} ({(Convert.ToDouble(pr.CorrectAsserts) / pr.TotalAsserts) * 100}%) | IsNsfw: {pr.NsfwAsserts} / {pr.TotalAsserts} ({(Convert.ToDouble(pr.NsfwAsserts) / pr.TotalAsserts) * 100}%)");
