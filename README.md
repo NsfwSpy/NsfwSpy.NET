@@ -1,14 +1,14 @@
 <img src="https://raw.githubusercontent.com/d00ML0rDz/NsfwSpy/main/_art/NsfwSpy-Logo.jpg" alt="NsfwSpy Logo" width="400"/>
 
 # Introduction
-NsfwSpy is a nudity/pornography image and video classifier built for .NET Core 2.0 and later, with support for Windows, [macOS](#macos-support) and Linux, to aid in moderating user-generated content for various different application types, written in C#. The [ML.NET](https://github.com/dotnet/machinelearning) model has been trained against the ResNet V250 neural net architecture with 500,000 images (158GB), from 4 different categories:
+NsfwSpy is a nudity/pornography image and video classifier built for .NET Core 2.0 and later, with support for Windows, [macOS](#macos-support) and Linux, to aid in moderating user-generated content for various different application types, written in C#. The [ML.NET](https://github.com/dotnet/machinelearning) model has been trained against the ResNet V250 neural net architecture with 538,000 images (186GB), from 4 different categories:
 
-| Label       | Description |
-| ----------- | ----------- |
-| Pornography | Images that depict sexual acts and nudity. |
-| Sexy        | Images of people in their underwear and men who are topless. |
-| Hentai      | Drawings or animations of sexual acts and nudity. |
-| Neutral     | Images that are not sexual in nature. |
+| Label       | Description | Files |
+| ----------- | ----------- | ----- |
+| Pornography | Images that depict sexual acts and nudity. | 108,000 |
+| Sexy        | Images of people in their underwear and men who are topless. | 76,000 |
+| Hentai      | Drawings or animations of sexual acts and nudity. | 83,000 |
+| Neutral     | Images that are not sexual in nature. | 270,000 |
 
 <img src="https://raw.githubusercontent.com/d00ML0rDz/NsfwSpy/main/_art/Examples.gif" />
 
@@ -17,8 +17,8 @@ NsfwSpy isn't perfect, but the accuracy should be good enough to detect approxim
 
 |     | Pornography | Sexy | Hentai | Neutral |
 | --- | --- | --- | --- | --- |
-| Is Nsfw  <sub><sup>(pornography + sexy + hentai >= 0.5)</sup></sub> | 96.3% | 97.2% | 96.9% | 3.8% | 
-| Correctly Predicted Label | 85.0% | 83.5% | 93.6% | 96.6% |
+| Is Nsfw  <sub><sup>(pornography + sexy + hentai >= 0.5)</sup></sub> | 96.1% | 96.8% | 95.0% | 4.0% | 
+| Correctly Predicted Label | 86.3% | 82.7% | 91.8% | 96.4% |
 
 # Quick Start
 This project is available as a [NuGet](https://www.nuget.org/packages/NsfwSpy/) package and can be installed with the following commands:
