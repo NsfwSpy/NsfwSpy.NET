@@ -1,4 +1,5 @@
-﻿using ImageMagick;
+﻿using HeyRed.Mime;
+using ImageMagick;
 using Microsoft.ML;
 using System;
 using System.Collections.Concurrent;
@@ -34,6 +35,15 @@ namespace NsfwSpyNS
         /// <returns>A NsfwSpyResult that indicates the predicted value and scores for the 5 categories of classification.</returns>
         public NsfwSpyResult ClassifyImage(byte[] imageData)
         {
+            var fileType = MimeGuesser.GuessFileType(imageData);
+            if (fileType.Extension == "webp")
+            {
+                using (MagickImage image = new MagickImage(imageData))
+                {
+                    imageData = image.ToByteArray(MagickFormat.Png);
+                }
+            }
+
             var modelInput = new ModelInput(imageData);
             var mlContext = new MLContext();
             var predictionEngine = mlContext.Model.CreatePredictionEngine<ModelInput, ModelOutput>(_model);
