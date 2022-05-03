@@ -9,10 +9,13 @@ namespace NsfwSpyNS.Test
 {
     public class UnitTests
     {
-        [Fact]
-        public void ClassifyImageByteArray_ValidByteArray()
+        [Theory]
+        [InlineData("flower.jpg")]
+        [InlineData("flower.png")]
+        [InlineData("flower.webp")]
+        public void ClassifyImageByteArray_ValidByteArray(string filename)
         {
-            var filePath = Path.Combine(AppContext.BaseDirectory, @"Assets/flower.jpg");
+            var filePath = Path.Combine(AppContext.BaseDirectory, $@"Assets/{filename}");
             var imageBytes = File.ReadAllBytes(filePath);
 
             var nsfwSpy = new NsfwSpy();
@@ -28,10 +31,13 @@ namespace NsfwSpyNS.Test
             Assert.Throws<ClassificationFailedException>(() => nsfwSpy.ClassifyImage(new byte[0]));
         }
 
-        [Fact]
-        public void ClassifyImageUri_ValidUri()
+        [Theory]
+        [InlineData("https://raw.githubusercontent.com/d00ML0rDz/NsfwSpy/main/NsfwSpy.Test/Assets/flower.jpg")]
+        [InlineData("https://raw.githubusercontent.com/d00ML0rDz/NsfwSpy/main/NsfwSpy.Test/Assets/flower.png")]
+        [InlineData("https://raw.githubusercontent.com/d00ML0rDz/NsfwSpy/main/NsfwSpy.Test/Assets/flower.webp")]
+        public void ClassifyImageUri_ValidUri(string url)
         {
-            var uri = new Uri("https://pbs.twimg.com/profile_images/883859744498176000/pjEHfbdn_400x400.jpg");
+            var uri = new Uri(url);
 
             var nsfwSpy = new NsfwSpy();
             var result = nsfwSpy.ClassifyImage(uri);
@@ -39,10 +45,13 @@ namespace NsfwSpyNS.Test
             Assert.Equal("Neutral", result.PredictedLabel);
         }
 
-        [Fact]
-        public void ClassifyImageUri_CustomWebClient()
+        [Theory]
+        [InlineData("https://raw.githubusercontent.com/d00ML0rDz/NsfwSpy/main/NsfwSpy.Test/Assets/flower.jpg")]
+        [InlineData("https://raw.githubusercontent.com/d00ML0rDz/NsfwSpy/main/NsfwSpy.Test/Assets/flower.png")]
+        [InlineData("https://raw.githubusercontent.com/d00ML0rDz/NsfwSpy/main/NsfwSpy.Test/Assets/flower.webp")]
+        public void ClassifyImageUri_CustomWebClient(string url)
         {
-            var uri = new Uri("https://pbs.twimg.com/profile_images/883859744498176000/pjEHfbdn_400x400.jpg");
+            var uri = new Uri(url);
             var webClient = new WebClient();
             webClient.Headers["User-Agent"] = "test";
 
@@ -52,10 +61,13 @@ namespace NsfwSpyNS.Test
             Assert.Equal("Neutral", result.PredictedLabel);
         }
 
-        [Fact]
-        public void ClassifyImageFilePath_ValidFilePath()
+        [Theory]
+        [InlineData("flower.jpg")]
+        [InlineData("flower.png")]
+        [InlineData("flower.webp")]
+        public void ClassifyImageFilePath_ValidFilePath(string filename)
         {
-            var filePath = Path.Combine(AppContext.BaseDirectory, @"Assets/flower.jpg");
+            var filePath = Path.Combine(AppContext.BaseDirectory, $@"Assets/{filename}");
 
             var nsfwSpy = new NsfwSpy();
             var result = nsfwSpy.ClassifyImage(filePath);
@@ -72,10 +84,13 @@ namespace NsfwSpyNS.Test
             Assert.Throws<FileNotFoundException>(() => nsfwSpy.ClassifyImage(filePath));
         }
 
-        [Fact]
-        public async Task ClassifyImageUriAsync_ValidUri()
+        [Theory]
+        [InlineData("https://raw.githubusercontent.com/d00ML0rDz/NsfwSpy/main/NsfwSpy.Test/Assets/flower.jpg")]
+        [InlineData("https://raw.githubusercontent.com/d00ML0rDz/NsfwSpy/main/NsfwSpy.Test/Assets/flower.png")]
+        [InlineData("https://raw.githubusercontent.com/d00ML0rDz/NsfwSpy/main/NsfwSpy.Test/Assets/flower.webp")]
+        public async Task ClassifyImageUriAsync_ValidUri(string url)
         {
-            var uri = new Uri("https://pbs.twimg.com/profile_images/883859744498176000/pjEHfbdn_400x400.jpg");
+            var uri = new Uri(url);
 
             var nsfwSpy = new NsfwSpy();
             var result = await nsfwSpy.ClassifyImageAsync(uri);
@@ -83,10 +98,13 @@ namespace NsfwSpyNS.Test
             Assert.Equal("Neutral", result.PredictedLabel);
         }
 
-        [Fact]
-        public async Task ClassifyImageUriAsync_CustomWebClient()
+        [Theory]
+        [InlineData("https://raw.githubusercontent.com/d00ML0rDz/NsfwSpy/main/NsfwSpy.Test/Assets/flower.jpg")]
+        [InlineData("https://raw.githubusercontent.com/d00ML0rDz/NsfwSpy/main/NsfwSpy.Test/Assets/flower.png")]
+        [InlineData("https://raw.githubusercontent.com/d00ML0rDz/NsfwSpy/main/NsfwSpy.Test/Assets/flower.webp")]
+        public async Task ClassifyImageUriAsync_CustomWebClient(string url)
         {
-            var uri = new Uri("https://pbs.twimg.com/profile_images/883859744498176000/pjEHfbdn_400x400.jpg");
+            var uri = new Uri(url);
             var webClient = new WebClient();
             webClient.Headers["User-Agent"] = "test";
 
@@ -96,10 +114,13 @@ namespace NsfwSpyNS.Test
             Assert.Equal("Neutral", result.PredictedLabel);
         }
 
-        [Fact]
-        public async Task ClassifyImageFilePathAsync_ValidFilePath()
+        [Theory]
+        [InlineData("flower.jpg")]
+        [InlineData("flower.png")]
+        [InlineData("flower.webp")]
+        public async Task ClassifyImageFilePathAsync_ValidFilePath(string filename)
         {
-            var filePath = Path.Combine(AppContext.BaseDirectory, @"Assets/flower.jpg");
+            var filePath = Path.Combine(AppContext.BaseDirectory, $@"Assets/{filename}");
 
             var nsfwSpy = new NsfwSpy();
             var result = await nsfwSpy.ClassifyImageAsync(filePath);
