@@ -140,6 +140,7 @@ namespace NsfwSpyNS
 
             using (var collection = new MagickImageCollection(gifImage))
             {
+                collection.Coalesce();
                 var frameCount = collection.Count;
 
                 Parallel.For(0, frameCount, (i, state) =>

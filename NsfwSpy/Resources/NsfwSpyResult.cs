@@ -37,7 +37,7 @@ namespace NsfwSpyNS
         public string PredictedLabel { get; }
 
         /// <summary>
-        /// Whether the image is likely to be explicit. True if the sum of nsfw, hentai and sexy is equal to or above 0.5.
+        /// Whether the image is likely to be explicit. True if the sum of pornography, hentai and sexy is equal to or above 0.5.
         /// </summary>
         public bool IsNsfw => Neutral < 0.5;
 
@@ -53,6 +53,11 @@ namespace NsfwSpyNS
             Pornography = modelOutput.Score[(int)EClassificationType.Pornography];
             Sexy = modelOutput.Score[(int)EClassificationType.Sexy];
             PredictedLabel = modelOutput.PredictedLabel;
+
+            if (Hentai + Neutral + Pornography + Sexy == 0)
+            {
+                throw new ClassificationFailedException("Classification of the file failed. Make sure the file is a valid image format (jpg, png, gif etc) and has been loaded correctly.");
+            }
         }
 
         /// <summary>

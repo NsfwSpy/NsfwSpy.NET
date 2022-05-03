@@ -22,6 +22,13 @@ namespace NsfwSpyNS.Test
         }
 
         [Fact]
+        public void ClassifyImageByteArray_InvalidByteArray()
+        {
+            var nsfwSpy = new NsfwSpy();
+            Assert.Throws<ClassificationFailedException>(() => nsfwSpy.ClassifyImage(new byte[0]));
+        }
+
+        [Fact]
         public void ClassifyImageUri_ValidUri()
         {
             var uri = new Uri("https://pbs.twimg.com/profile_images/883859744498176000/pjEHfbdn_400x400.jpg");
@@ -238,7 +245,11 @@ namespace NsfwSpyNS.Test
             var nsfwSpy = new NsfwSpy();
             var result = nsfwSpy.ClassifyVideo(imageBytes);
 
-            Assert.Equal(181, result.Frames.Count);
+            if (filename.EndsWith(".webm"))
+                Assert.Equal(180, result.Frames.Count);
+            else
+                Assert.Equal(181, result.Frames.Count);
+
             Assert.True(result.IsNsfw);
         }
 
@@ -254,7 +265,11 @@ namespace NsfwSpyNS.Test
             var nsfwSpy = new NsfwSpy();
             var result = nsfwSpy.ClassifyVideo(filePath);
 
-            Assert.Equal(181, result.Frames.Count);
+            if (filename.EndsWith(".webm"))
+                Assert.Equal(180, result.Frames.Count);
+            else
+                Assert.Equal(181, result.Frames.Count);
+
             Assert.True(result.IsNsfw);
         }
 
@@ -274,7 +289,11 @@ namespace NsfwSpyNS.Test
             var nsfwSpy = new NsfwSpy();
             var result = nsfwSpy.ClassifyVideo(filePath, videoOptions);
 
-            Assert.Equal(91, result.Frames.Count);
+            if (filename.EndsWith(".webm"))
+                Assert.Equal(90, result.Frames.Count);
+            else
+                Assert.Equal(91, result.Frames.Count);
+
             Assert.True(result.IsNsfw);
         }
 
@@ -354,7 +373,11 @@ namespace NsfwSpyNS.Test
             var nsfwSpy = new NsfwSpy();
             var result = await nsfwSpy.ClassifyVideoAsync(filePath);
 
-            Assert.Equal(181, result.Frames.Count);
+            if (filename.EndsWith(".webm"))
+                Assert.Equal(180, result.Frames.Count);
+            else
+                Assert.Equal(181, result.Frames.Count);
+
             Assert.True(result.IsNsfw);
         }
 
