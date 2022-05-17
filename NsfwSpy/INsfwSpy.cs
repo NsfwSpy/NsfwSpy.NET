@@ -7,6 +7,7 @@ namespace NsfwSpyNS
 {
     public interface INsfwSpy
     {
+        NsfwSpyFramesResult ClassifyGif(byte[] gifImage, VideoOptions videoOptions = null);
         NsfwSpyFramesResult ClassifyGif(string filePath, VideoOptions videoOptions = null);
         NsfwSpyFramesResult ClassifyGif(Uri uri, WebClient webClient = null, VideoOptions videoOptions = null);
         Task<NsfwSpyFramesResult> ClassifyGifAsync(string filePath, VideoOptions videoOptions = null);
