@@ -13,7 +13,7 @@
     <PackageLicenseExpression></PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <Version>3.4.1</Version>
+    <Version>3.4.2</Version>
   </PropertyGroup>
 
   <ItemGroup>
