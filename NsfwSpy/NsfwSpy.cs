@@ -253,6 +253,7 @@ namespace NsfwSpyNS
 
             using (var collection = new MagickImageCollection(video, MagickFormat.Mp4))
             {
+                collection.Coalesce();
                 var frameCount = collection.Count;
 
                 Parallel.For(0, frameCount, (i, state) =>
