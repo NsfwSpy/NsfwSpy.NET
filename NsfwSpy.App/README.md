@@ -1,4 +1,4 @@
-﻿<img src="https://raw.githubusercontent.com/d00ML0rDz/NsfwSpy/main/_art/NsfwSpy.App.gif" alt="NsfwSpy App" />
+<img src="https://raw.githubusercontent.com/d00ML0rDz/NsfwSpy/main/_art/NsfwSpy.App.gif" alt="NsfwSpy App" width="400" />
 
 # Getting Started
 Looking for a quick way to try out NsfwSpy? Use our dedicated, self-hosted web app to classify images, gifs and videos with ease.
