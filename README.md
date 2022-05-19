@@ -21,6 +21,8 @@ NsfwSpy isn't perfect, but the accuracy should be good enough to detect approxim
 | Correctly Predicted Label | 86.0% | 83.2% | 91.8% | 96.8% |
 
 # Quick Start
+Looking to quickly try out NsfwSpy? Check out our steps to use [NsfwSpy.App](https://github.com/d00ML0rDz/NsfwSpy/tree/main/NsfwSpy.App).
+
 This project is available as a [NuGet](https://www.nuget.org/packages/NsfwSpy/) package and can be installed with the following commands:
 
 **Package Manager**
@@ -32,7 +34,6 @@ Install-Package NsfwSpy
 ```
 dotnet add package NsfwSpy
 ```
-Looking to quickly try out NsfwSpy? Check out our steps to use [NsfwSpy.App](https://github.com/d00ML0rDz/NsfwSpy/tree/main/NsfwSpy.App).
 
 ### Classify an Image File
 ```csharp
