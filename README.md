@@ -32,6 +32,7 @@ Install-Package NsfwSpy
 ```
 dotnet add package NsfwSpy
 ```
+Looking to quickly try out NsfwSpy? Check out our steps to use [NsfwSpy.App](https://github.com/d00ML0rDz/NsfwSpy/tree/main/NsfwSpy.App).
 
 ### Classify an Image File
 ```csharp
