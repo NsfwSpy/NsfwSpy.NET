@@ -13,14 +13,14 @@
     <PackageLicenseExpression></PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <Version>3.4.2</Version>
+    <Version>3.4.3</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="11.1.0" />
+    <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="11.1.2" />
     <PackageReference Include="Microsoft.ML" Version="1.6.0" />
     <PackageReference Include="Microsoft.ML.Vision" Version="1.6.0" />
-    <PackageReference Include="Mime" Version="3.3.0" />
+    <PackageReference Include="Mime" Version="3.4.0" />
     <PackageReference Include="SciSharp.TensorFlow.Redist-Linux-GPU" Version="2.3.1" />
     <PackageReference Include="SciSharp.TensorFlow.Redist-Windows-GPU" Version="2.3.1" />
   </ItemGroup>
