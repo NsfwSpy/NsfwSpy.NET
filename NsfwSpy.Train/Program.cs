@@ -17,6 +17,7 @@ namespace NsfwSpyNS.Train
             var assetsPath = @"E:\NsfwSpy\Images";
 
             var mlContext = new MLContext();
+            mlContext.Log += (object sender, LoggingEventArgs e) => Console.WriteLine(e.Message);
 
             var images = LoadImagesFromDirectory(assetsPath);
             var imageData = mlContext.Data.LoadFromEnumerable(images);
