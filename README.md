@@ -129,6 +129,8 @@ Install-Package SciSharp.TensorFlow.Redist -Version 2.3.1
 ```
 dotnet add package SciSharp.TensorFlow.Redist --version 2.3.1
 ```
+# Contact Us
+Interested to get involved in the project? Whether you fancy adding features, providing images to train NsfwSpy with or something else, feel free to contact us via email at [nsfwspy@outlook.com](mailto:nsfwspy@outlook.com) or find us on Twitter at [@nsfw_spy](https://twitter.com/nsfw_spy).
 
 # Notes
 Using NsfwSpy? Let us know! We're keen to hear how the technology is being used and improving the safety of applications.
