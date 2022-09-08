@@ -135,9 +135,9 @@ Please note that Macs that use M1 chips currently [do not support TensorFlow](ht
 # Contact Us
 Interested to get involved in the project? Whether you fancy adding features, providing images to train NsfwSpy with or something else, feel free to contact us via email at [nsfwspy@outlook.com](mailto:nsfwspy@outlook.com) or find us on Twitter at [@nsfw_spy](https://twitter.com/nsfw_spy).
 
-We're keen to find someone who can help us develop a JavaScript solution by training a model using our dataset. If you have experience and want to help, drop us a message 😊
-
 # Notes
 Using NsfwSpy? Let us know! We're keen to hear how the technology is being used and improving the safety of applications.
+
+Looking for a JavaScript version of NsfwSpy? We have you covered - [NsfwSpy.js](https://github.com/d00ML0rDz/NsfwSpy.js) 😎
 
 Got a feature request or found something not quite right? Report it [here](https://github.com/d00ML0rDz/NsfwSpy/issues) on GitHub and we'll try to help as best as possible.
