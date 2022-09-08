@@ -12,6 +12,8 @@ NsfwSpy is a nudity/pornography image and video classifier built for .NET Core 2
 
 <img src="https://raw.githubusercontent.com/d00ML0rDz/NsfwSpy/main/_art/Examples.gif" />
 
+Looking for a JavaScript version of NsfwSpy? We have you covered - [NsfwSpy.js](https://github.com/d00ML0rDz/NsfwSpy.js) 😎
+
 # Performance
 NsfwSpy isn't perfect, but the accuracy should be good enough to detect approximately 96% of Nsfw images, those being images that are classed as pornography, sexy or hentai.
 
@@ -137,7 +139,5 @@ Interested to get involved in the project? Whether you fancy adding features, pr
 
 # Notes
 Using NsfwSpy? Let us know! We're keen to hear how the technology is being used and improving the safety of applications.
-
-Looking for a JavaScript version of NsfwSpy? We have you covered - [NsfwSpy.js](https://github.com/d00ML0rDz/NsfwSpy.js) 😎
 
 Got a feature request or found something not quite right? Report it [here](https://github.com/d00ML0rDz/NsfwSpy/issues) on GitHub and we'll try to help as best as possible.
