@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <Authors>d00M_L0rDz</Authors>
-    <Company>d00M_L0rDz</Company>
+    <Authors>NsfwSpy</Authors>
+    <Company>NsfwSpy</Company>
     <PackageTags>nsfw nude nudity porn pornography explicit image detect detection classification classifier machinglearning ml.net</PackageTags>
     <Description>NsfwSpy is an image and video classifier used to identify explicit/pornographic content using machine learning.</Description>
     <RepositoryUrl>https://github.com/d00ML0rDz/NsfwSpy</RepositoryUrl>
