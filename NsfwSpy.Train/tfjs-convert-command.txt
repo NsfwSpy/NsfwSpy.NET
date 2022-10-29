@@ -1,0 +1,1 @@
+tensorflowjs_converter --input_format=tf_frozen_model {input_file} {export_dir} --output_node_names=Score --skip_op_check
