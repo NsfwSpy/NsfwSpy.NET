@@ -6,8 +6,8 @@
     <Company>NsfwSpy</Company>
     <PackageTags>nsfw nude nudity porn pornography explicit image detect detection classification classifier machinglearning ml.net</PackageTags>
     <Description>NsfwSpy is an image and video classifier used to identify explicit/pornographic content using machine learning.</Description>
-    <RepositoryUrl>https://github.com/d00ML0rDz/NsfwSpy</RepositoryUrl>
-    <PackageProjectUrl>https://github.com/d00ML0rDz/NsfwSpy</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/NsfwSpy/NsfwSpy.NET</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/NsfwSpy/NsfwSpy.NET</PackageProjectUrl>
     <PackageIcon>NsfwSpy-Icon.png</PackageIcon>
     <PackageIconUrl />
     <PackageLicenseExpression></PackageLicenseExpression>
