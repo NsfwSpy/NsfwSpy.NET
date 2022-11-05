@@ -1,4 +1,5 @@
 ﻿using Microsoft.ML;
+using Microsoft.ML.Trainers;
 using Microsoft.ML.Vision;
 using System;
 using System.Collections.Generic;
@@ -54,7 +55,8 @@ namespace NsfwSpyNS.Train
                 BatchSize = 32,
                 LearningRate = 0.01f,
                 EarlyStoppingCriteria = new ImageClassificationTrainer.EarlyStopping { CheckIncreasing = true, MinDelta = 0.00001f, Patience = 50 },
-                WorkspacePath = workspaceRelativePath
+                WorkspacePath = workspaceRelativePath,
+                LearningRateScheduler = new ExponentialLRDecay(numEpochsPerDecay: 5)
             };
 
             var trainingPipeline = mlContext.MulticlassClassification.Trainers.ImageClassification(classifierOptions)
