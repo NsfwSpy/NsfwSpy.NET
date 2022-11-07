@@ -1,14 +1,14 @@
 <img src="https://raw.githubusercontent.com/NsfwSpy/NsfwSpy.NET/main/_art/NsfwSpy.jpg" alt="NsfwSpy Logo" width="400"/>
 
 # Introduction
-NsfwSpy is a nudity/pornography image and video classifier built for .NET Core 2.0 and later, with support for Windows, [macOS](#macos-support) and Linux, to aid in moderating user-generated content for various different application types, written in C#. The [ML.NET](https://github.com/dotnet/machinelearning) model has been trained against the ResNet V250 neural net architecture with 537,000 images (186GB), from 4 different categories:
+NsfwSpy is a nudity/pornography image and video classifier built for .NET Core 2.0 and later, with support for Windows, [macOS](#macos-support) and Linux, to aid in moderating user-generated content for various different application types, written in C#. The [ML.NET](https://github.com/dotnet/machinelearning) model has been trained against the ResNet V250 neural net architecture with 646,000 images (109GB), from 4 different categories:
 
 | Label       | Description | Files |
 | ----------- | ----------- | ----- |
-| Pornography | Images that depict sexual acts and nudity. | 108,000 |
-| Sexy        | Images of people in their underwear and men who are topless. | 76,000 |
+| Pornography | Images that depict sexual acts and nudity. | 106,000 |
+| Sexy        | Images of people in their underwear and men who are topless. | 78,000 |
 | Hentai      | Drawings or animations of sexual acts and nudity. | 83,000 |
-| Neutral     | Images that are not sexual in nature. | 268,000 |
+| Neutral     | Images that are not sexual in nature. | 378,000 |
 
 <img src="https://raw.githubusercontent.com/d00ML0rDz/NsfwSpy/main/_art/Examples.gif" />
 
