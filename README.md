@@ -20,8 +20,8 @@ NsfwSpy isn't perfect, but the accuracy should be good enough to detect approxim
 
 |     | Pornography | Sexy | Hentai | Neutral |
 | --- | --- | --- | --- | --- |
-| Is Nsfw <sub><sup>(pornography + sexy + hentai >= 0.5)</sup></sub> | 96.5% | 97.2% | 95.1% | 3.7% | 
-| Correctly Predicted Label | 86.0% | 83.2% | 91.8% | 96.8% |
+| Is Nsfw <sub><sup>(pornography + sexy + hentai >= 0.5)</sup></sub> | 95.8% | 97.0% | 95.2% | 3.7% | 
+| Correctly Predicted Label | 85.7% | 84.4% | 91.9% | 96.54% |
 
 # Quick Start
 Looking to quickly try out NsfwSpy? Check out our steps to use [NsfwSpy.App](https://github.com/d00ML0rDz/NsfwSpy/tree/main/NsfwSpy.App).
