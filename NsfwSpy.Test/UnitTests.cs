@@ -216,7 +216,7 @@ namespace NsfwSpyNS.Test
         [Fact]
         public void ClassifyGifUri_EndEarlyOnNsfw()
         {
-            var uri = new Uri("https://c.tenor.com/5y-jOowm51MAAAAd/bikini.gif");
+            var uri = new Uri("https://c.tenor.com/Rldfm57e8J4AAAAd/tenor.gif");
             var videoOptions = new VideoOptions
             {
                 EarlyStopOnNsfw = true
@@ -226,7 +226,7 @@ namespace NsfwSpyNS.Test
             var result = nsfwSpy.ClassifyGif(uri, videoOptions: videoOptions);
 
             Assert.True(result.IsNsfw);
-            Assert.True(result.Frames.Count < 181); // This Gif has 181 frames
+            Assert.True(result.Frames.Count < 76); // This Gif has 76 frames
         }
 
         [Fact]
