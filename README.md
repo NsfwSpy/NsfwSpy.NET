@@ -118,7 +118,7 @@ sudo apt install ffmpeg
 ```
 
 # GPU Support
-To get GPU support working, please follow the prerequisite steps [here](https://docs.microsoft.com/en-us/dotnet/api/microsoft.ml.vision.imageclassificationtrainer?view=ml-dotnet&fbclid=IwAR3Ng6Pe1BWDZ3hR20tchutSozmdMojxvpy3pqdwA3fZ_OEstU8C-ptSRZw#gpu-support) to install [CUDA v10.1](https://developer.nvidia.com/cuda-10.1-download-archive-update2) and [CUDNN v7.6.4 for CUDA 10.1]([https://developer.nvidia.com/rdp/cudnn-download](https://developer.nvidia.com/rdp/cudnn-archive)). Later versions do not work (as I tried with CUDA v11.4). The SciSharp.TensorFlow.Redist-Windows-GPU and SciSharp.TensorFlow.Redist-Linux-GPU packages are already included as part of the NsfwSpy package.
+To get GPU support working, please follow the prerequisite steps [here](https://docs.microsoft.com/en-us/dotnet/api/microsoft.ml.vision.imageclassificationtrainer?view=ml-dotnet&fbclid=IwAR3Ng6Pe1BWDZ3hR20tchutSozmdMojxvpy3pqdwA3fZ_OEstU8C-ptSRZw#gpu-support) to install [CUDA v10.1](https://developer.nvidia.com/cuda-10.1-download-archive-update2) and [CUDNN v7.6.4 for CUDA 10.1](https://developer.nvidia.com/rdp/cudnn-archive). Later versions do not work (as I tried with CUDA v11.4). The SciSharp.TensorFlow.Redist-Windows-GPU and SciSharp.TensorFlow.Redist-Linux-GPU packages are already included as part of the NsfwSpy package.
 
 # macOS Support
 To get NsfwSpy working on macOS, the [SciSharp.TensorFlow.Redist v2.3.1](https://www.nuget.org/packages/SciSharp.TensorFlow.Redist/2.3.1) NuGet package also needs to be installed. This not included by default as it interfers with supporting GPUs on Windows and Linux. You can do this with either of the following commands:
